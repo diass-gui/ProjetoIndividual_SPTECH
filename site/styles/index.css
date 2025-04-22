@@ -11,11 +11,14 @@ body {
     margin-left: 30px;
     font-size: 20px;
 }
-.cabecalho .paginas ul {
+.cabecalho .paginas {
     display: flex;
+    font-size: 20px;
+}
+.cabecalho .paginas ul {
     flex-direction: row;
     margin-right: 20px;
 }
-.cabecalho .paginas li {
+.cabecalho .paginas a {
     margin: 10px;
 }
