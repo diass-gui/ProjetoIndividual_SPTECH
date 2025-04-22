@@ -1,0 +1,21 @@
+body {
+    background-color: black;
+}
+.cabecalho {
+    display: flex;
+    color: white;
+    justify-content: space-between;
+}
+.cabecalho .titulo {
+    align-items: flex-start;
+    margin-left: 30px;
+    font-size: 20px;
+}
+.cabecalho .paginas ul {
+    display: flex;
+    flex-direction: row;
+    margin-right: 20px;
+}
+.cabecalho .paginas li {
+    margin: 10px;
+}
