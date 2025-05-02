@@ -1,24 +1,42 @@
 body {
-    background-color: black;
+    background-color: rgb(0, 0, 0);
+    margin: 0;
 }
-.cabecalho {
+.navbar {
+    background-color: rgb(61, 60, 60);
     display: flex;
-    color: white;
     justify-content: space-between;
+    align-items: center;
+    height: 110px;
 }
-.cabecalho .titulo {
+.navbar .logo {
     align-items: flex-start;
     margin-left: 30px;
-    font-size: 20px;
 }
-.cabecalho .paginas {
+.navbar .logo img {
+    height: 80px;
+    width: 100px;
+}
+.navbar .paginas {
     display: flex;
     font-size: 20px;
 }
-.cabecalho .paginas ul {
+.navbar .paginas ul {
     flex-direction: row;
     margin-right: 20px;
 }
-.cabecalho .paginas a {
-    margin: 10px;
+.navbar .paginas a {
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+}
+.navbar .paginas .a-cadastro {
+    background-color: orange;
+    color: white;
+    border-radius: 7px;
+}
+.navbar .paginas a:hover {
+    background-color: black;
+    border-radius: 7px; 
+    transition: 250ms;
 }
