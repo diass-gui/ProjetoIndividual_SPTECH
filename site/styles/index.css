@@ -2,6 +2,7 @@ body {
     background-color: rgb(0, 0, 0);
     margin: 0;
 }
+/* NAVBAR */
 .navbar {
     background-color: rgb(61, 60, 60);
     display: flex;
@@ -39,4 +40,50 @@ body {
     background-color: black;
     border-radius: 7px; 
     transition: 250ms;
+}
+/* BANNER */
+.banner {
+    background-color: orange;
+    display: flex;
+    margin: 0 auto;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.banner .texto h2 {
+    background-color: orange;
+    color: white;
+    padding: 30px;
+    margin-left: 30px;
+    /* margin-bottom: 40px;
+    border: 2px solid white;
+    border-radius: 10px;*/
+}
+.banner .img_banner {
+    align-self: flex-start;
+}
+.banner .img_banner img {
+    margin: 0 auto;
+    height: 450px;
+    width: 750px;
+}
+/*Ap.Projeto*/
+.apresentacao_projeto {
+    display: flex;
+    background-color: black;
+    justify-content: space-between;
+    margin: 70px;
+}
+.apresentacao_projeto .img_projeto {
+    margin: 0;
+    align-items: flex-start;
+}
+.apresentacao_projeto .img_projeto img {
+    height: 280px;
+    width: 320px;
+}
+.apresentacao_projeto .projeto_texto {
+    color: white;
+    font-size: 20px;
+    margin-left: 100px;
 }
