@@ -1,27 +1,70 @@
 body {
-    background-color: black;
+    background-color: rgb(61, 60, 60);
     margin: 0;
     font-family: 'Urbanist', sans-serif;
-}
-.cadastro {
-    background-image: url("foto_cadastro.jpg");
-    background-size: cover;
+    background-color: orange;
 }
 .titulo_cadastro {
     display: flex;
-    font-family: 'Bangers', cursive;
     padding: 10px;
     justify-content: center;
+    height: 110px;
+    width: 100%;
+    margin: 0;
+}
+.titulo_cadastro h2 {
+    font-family: 'Bangers', cursive;
+    color: black;
+    font-size: 32px;
+}
+.cadastro {
+    display: flex;
+    justify-content: center;
+    justify-content: space-around;
+    height: 100%;
+    margin-bottom: 30px;
 }
 .cadastro_form {
     display: flex;
     justify-content: space-around;
-    padding: 20px;
+    margin: 0;
+    margin-left: 25px;
 }
 .cadastro_form .dados_cadastro {
+    background-color: white;
     flex-direction: column;
-    padding: 30px;
+    padding: 20px; 
+    border: 2px solid black;
+    border-radius: 20px;
+    margin-left: 120px;
+    display: flex;
 }
 .cadastro_form .dados_cadastro .campo_cadastro {
-    padding: 15px;
+    padding: 20px;
+    margin-top: 4px;
+}
+.cadastro_form .dados_cadastro .btn_cadastrar button {
+    background-color: black;
+    color: white;
+    font-family: 'Bangers', cursive;
+    margin-left: 150px;
+    height: 30px;
+    width: 100px;
+    margin-top: 20px;
+}
+.cadastro_form .dados_cadastro .btn_cadastrar button:hover {
+    color: orange;
+    transition: 250ms;
+}
+.cadastro_form .dados_cadastro .link_login {
+    margin-left: 30px;
+    margin-top: 25px;
+}
+.cadastro img {
+    height: 507px;
+    width: 700px;
+    margin: 0;
+    border: 2px solid black;
+    border-radius: 20px;
+    margin-right: 39.5px;
 }
