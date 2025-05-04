@@ -1,13 +1,27 @@
 body {
     background-color: black;
     margin: 0;
+    font-family: 'Urbanist', sans-serif;
 }
-.formulario_cadastro {
-    background-color: white;
+.cadastro {
+    background-image: url("foto_cadastro.jpg");
+    background-size: cover;
+}
+.titulo_cadastro {
+    display: flex;
+    font-family: 'Bangers', cursive;
+    padding: 10px;
+    justify-content: center;
+}
+.cadastro_form {
     display: flex;
     justify-content: space-around;
-    padding: 10px;
+    padding: 20px;
 }
-.formulario_cadastro {
-    display: flex;
+.cadastro_form .dados_cadastro {
+    flex-direction: column;
+    padding: 30px;
+}
+.cadastro_form .dados_cadastro .campo_cadastro {
+    padding: 15px;
 }

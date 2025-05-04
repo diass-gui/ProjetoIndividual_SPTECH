@@ -121,6 +121,7 @@ body {
 .elementos .card_elemento {
     background-color: white;
     margin-right: 10px;  
+    margin-bottom: 20px;
 } 
 .elementos .card_elemento img {
     height: 160px;
