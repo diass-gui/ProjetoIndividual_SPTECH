@@ -1,6 +1,13 @@
 body {
     background-color: black;
+    margin: 0;
 }
 .formulario_cadastro {
     background-color: white;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+}
+.formulario_cadastro {
+    display: flex;
 }
