@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/index.css">
     <link rel="stylesheet" href="styles/login.css">
     <title>Login | Voz da Quebrada</title>
@@ -15,15 +17,43 @@
 
         <div class="paginas">
             <ul>
-                <a href="origem.html">Origem</a>
-                <a href="rap.html">Rap</a>
-                <a href="dj.html">DJ</a>
-                <a href="graffiti.html">Graffiti</a>
-                <a href="breakdance.html">Breakdance</a>
-                <a href="cadastro.html" class="a-cadastro">Junte-se a nós!</a>
+                <a href="index.html" class="login_voltar">Voltar ao Início</a>
+                <a href="cadastro.html">Cadastro</a>
             </ul>
         </div>
 
     </nav>
+
+    <div class="titulo_login">
+        <h2>Conecte-se conosco irmão!</h2>
+    </div>
+
+    <div class="login">
+        <div class="login_form">
+            <div class="dados_login">
+                <h3>Faça seu Login:</h3>
+                <div class="campo_login">
+                    <b>E-Mail:</b>
+                    <input type="email" class="input_email">
+                </div>
+                <div class="campo_login">
+                    <b>Senha:</b>
+                    <input type="password" class="input_senha" placeholder="**********">
+                </div>
+                <div class="btn_entrar">
+                    <button onclick="entrar()">Entrar</button>
+                </div>
+            </div>
+            <img src="https:////assets.brasildefato.com.br/2024/09/image_processing20220121-17965-3sfj1a.jpeg">
+        </div>
+    </div>
 </body>
 </html>
+
+<script>
+    
+    function entrar(){
+        window.location="visaogeral.html";
+    }
+    
+</script>

@@ -1,3 +1,56 @@
 body {
+    background-color: orange;    
+    font-family: 'Urbanist', sans-serif;
+}
+.navbar .paginas .login_voltar {
+    background-color: orange;
+    color: white;
+    border-radius: 7px;
+}
+.navbar .paginas .login_voltar a:hover {
     background-color: black;
+    transition: 250ms;
+}
+.titulo_login {
+    display: flex;
+    justify-content: center;
+}
+.titulo_login h2 {
+    font-family: 'Bangers', cursive;
+}
+.login {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 0px 0px 40px 0px;
+}
+.login_form {
+    display: flex;
+    align-items: center;
+    margin: 20px 30px 20px 20px;
+}
+.login_form h3 {
+    font-family: 'Bangers', cursive;
+    padding: 20px;
+    margin: 80px 0px 15px 70px;
+}
+.login_form .dados_login {
+    flex-direction: column;
+    background-color: white;
+    height: 440px;
+    border: 2px solid black;
+    border-radius: 20px 0px 0px 20px;
+    width: 420px;
+}
+.login_form .dados_login .campo_login {
+    padding: 20px;
+}
+.login_form .dados_login .btn_entrar {
+    padding: 20px;
+}
+.login .login_form img {
+    height: 440px;
+    width: 640px;
+    border: 2px solid black;
+    border-radius: 0px 20px 20px 0px;
 }
