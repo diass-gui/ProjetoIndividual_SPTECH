@@ -4,6 +4,15 @@ body {
     font-family: 'Urbanist', sans-serif;
     background-color: orange;
 }
+.navbar .paginas .cadastro_voltar {
+    background-color: orange;
+    color:white;
+    border-radius: 7px;
+}
+.navbar .paginas .cadastro_voltar a:hover {
+    background-color: black;
+    transition: 250ms;
+}
 .titulo_cadastro {
     display: flex;
     padding: 10px;
@@ -29,15 +38,16 @@ body {
     justify-content: space-around;
     margin: 0;
     margin-left: 25px;
+    flex-direction: row;
 }
 .cadastro_form .dados_cadastro {
+    display: flex;
     background-color: white;
     flex-direction: column;
     padding: 20px; 
     border: 2px solid black;
-    border-radius: 20px;
-    margin-left: 120px;
-    display: flex;
+    border-radius: 20px 0px 0px 20px;
+    margin-left: 100px;
 }
 .cadastro_form .dados_cadastro .campo_cadastro {
     padding: 20px;
@@ -48,9 +58,11 @@ body {
     color: white;
     font-family: 'Bangers', cursive;
     margin-left: 150px;
-    height: 30px;
-    width: 100px;
+    height: 50px;
+    width: 120px;
     margin-top: 20px;
+    border-radius: 8px;
+    font-size: 21px;
 }
 .cadastro_form .dados_cadastro .btn_cadastrar button:hover {
     color: orange;
@@ -60,11 +72,11 @@ body {
     margin-left: 30px;
     margin-top: 25px;
 }
-.cadastro img {
+.cadastro .cadastro_form img {
     height: 507px;
-    width: 700px;
+    width: 05px;
     margin: 0;
     border: 2px solid black;
-    border-radius: 20px;
+    border-radius: 0px 20px 20px 0px;
     margin-right: 39.5px;
 }

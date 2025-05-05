@@ -49,6 +49,7 @@ body {
 /* Banner */
 .banner {
     background-color: orange;
+    height: 450px;
     display: flex;
     margin: 0 auto;
     flex-direction: row;
