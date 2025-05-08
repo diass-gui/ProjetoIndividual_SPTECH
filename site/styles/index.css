@@ -44,7 +44,7 @@ body {
 .navbar .paginas a:hover {
     background-color: black;
     border-radius: 7px; 
-    transition: 250ms;
+    transition: 310ms;
 }
 /* Banner */
 .banner {
@@ -210,7 +210,7 @@ body {
 .rodape .contato a:hover {
     color: white;
     background-color: black;
-    transition: 250ms;
+    transition: 310ms;
 }
 .rodape .consideracao_final {
     color: rgb(133, 129, 129);

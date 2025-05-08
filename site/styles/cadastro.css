@@ -1,75 +1,72 @@
 body {
     background-color: rgb(61, 60, 60);
-    margin: 0;
     font-family: 'Urbanist', sans-serif;
-    background-color: orange;
-}
-.navbar .paginas .cadastro_voltar {
-    background-color: orange;
-    color:white;
-    border-radius: 7px;
-}
-.navbar .paginas .cadastro_voltar a:hover {
-    background-color: black;
-    transition: 250ms;
-}
-.titulo_cadastro {
+    background-color: white;
     display: flex;
-    padding: 10px;
-    justify-content: center;
-    height: 110px;
-    width: 100%;
-    margin: 0;
+    flex-direction: row;
 }
-.titulo_cadastro h2 {
+.cadastro {
+    display: flex;
+    justify-content: flex-start;
+    height: 100%;
+    flex-direction: column;
+}
+.cadastro .paginas_cadastro ul {
+    margin-top: 25px;
+}
+.cadastro .paginas_cadastro a {
+    text-decoration: none;
+    color:black;
+    padding: 10px;
+}
+.cadastro .paginas_cadastro .voltar_cadastro {
+    background-color: orange;
+    border-radius: 7px;
+    color: white;
+}
+.cadastro .paginas_cadastro .voltar_cadastro:hover {
+    background-color: black;
+    transition: 310ms;
+}
+.cadastro .paginas_cadastro a:hover {
+    background-color: black;
+    color: white;
+    transition: 310ms;
+    border-radius: 5px;
+}
+.cadastro .dados_cadastro {
+    display: flex;
+    background-color: white;
+    flex-direction: column;
+    margin: 0px 0px 0px 15px;
+}
+.cadastro .dados_cadastro .titulo_cadastro {
+    display: flex;
+    justify-content: center;
+}
+.cadastro .dados_cadastro .titulo_cadastro h2 {
     font-family: 'Bangers', cursive;
     color: black;
     font-size: 32px;
 }
-.cadastro {
-    display: flex;
-    justify-content: center;
-    justify-content: space-around;
-    height: 100%;
-    /* margin-bottom: 40px; */
-    margin: 0px 0px 40px 0px;
-}
-.cadastro_form {
-    display: flex;
-    justify-content: space-around;
-    margin: 0px 0px 0px 25px;
-    /* margin-left: 25px; */
-    flex-direction: row;
-}
-.cadastro_form .dados_cadastro {
-    display: flex;
-    background-color: white;
-    flex-direction: column;
-    padding: 10px; 
-    border: 2px solid black;
-    border-radius: 20px 0px 0px 20px;
-    /* margin-left: 40px; */
-    margin: 0px 0px 0px 40px;
-}
-.cadastro_form .dados_cadastro .campo_cadastro input {
+.cadastro .dados_cadastro .campo_cadastro {
+    padding: 19.5px;
+    margin: 0px 10px 0px 0px;
+} 
+.cadastro .dados_cadastro .campo_cadastro input {
     border: 2px solid black;
     border-radius: 13px;
-    /* text-decoration: underline; */
     margin: 0px 15px 0px 25px;
     height: 25px;
     width: 200px;
 }
-.cadastro_form .dados_cadastro .campo_cadastro .input_dtNasc {
+.cadastro .dados_cadastro .campo_cadastro .input_dtNasc {
     margin: 0px 30px 0px 0px;
 }
-.cadastro_form .dados_cadastro .campo_cadastro {
-    padding: 20px;
-    margin: 4px 10px 0px 0px;
-} 
-.cadastro_form .dados_cadastro .campo_cadastro b {
+.cadastro .dados_cadastro .campo_cadastro b {
     font-size: 19px;
 }
-.cadastro_form .dados_cadastro .btn_cadastrar button {
+.cadastro .dados_cadastro .btn_cadastrar button {
     background-color: black;
     color: white;
     font-family: 'Bangers', cursive;
@@ -79,21 +76,23 @@ body {
     border-radius: 8px;
     font-size: 21px;
 }
-.cadastro_form .dados_cadastro .btn_cadastrar button:hover {
-    color: orange;
+.cadastro .dados_cadastro .btn_cadastrar button:hover {
+    background-color: orange;
+    color: white;
     transition: 250ms;
 }
-.cadastro_form .dados_cadastro .link_login p {
+.cadastro .dados_cadastro .link_login {
+    margin: 25px 0px 0px 30px;
+}
+.cadastro .dados_cadastro .link_login p {
     font-size: 19px;
     margin: 0px 0px 0px 8px;
 }
-.cadastro_form .dados_cadastro .link_login {
-    margin: 25px 0px 0px 30px;
+.imagem_cadastro {
+    display: flex;
+    justify-content: flex-end;
 }
-.cadastro .cadastro_form img {
-    height: 540px;
-    width: 600px;
-    margin: 0px 40px 0px 0px;
-    border: 2px solid black;
-    border-radius: 0px 20px 20px 0px;
+.imagem_cadastro img {
+    height: 660px;
+    width: 750px;
 }
