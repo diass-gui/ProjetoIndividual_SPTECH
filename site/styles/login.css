@@ -1,56 +1,100 @@
 body {
-    background-color: orange;    
+    background-color: black;    
     font-family: 'Urbanist', sans-serif;
-}
-.navbar .paginas .login_voltar {
-    background-color: orange;
-    color: white;
-    border-radius: 7px;
-}
-.navbar .paginas .login_voltar a:hover {
-    background-color: black;
-    transition: 250ms;
-}
-.titulo_login {
     display: flex;
-    justify-content: center;
-}
-.titulo_login h2 {
-    font-family: 'Bangers', cursive;
+    flex-direction: row;
 }
 .login {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin: 0px 0px 40px 0px;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 0px 120px 0px 0px;
+    margin-bottom: 0;
 }
-.login_form {
-    display: flex;
-    align-items: center;
-    margin: 20px 30px 20px 20px;
+.login .paginas {
+    margin-top: 30px;
 }
-.login_form h3 {
+.login .paginas a {
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+}
+.login .paginas a:hover {
+    background-color: white;
+    color: black;
+    transition: 310ms;
+    border-radius: 5px;
+}
+.login .paginas .login_voltar {
+    background-color: orange;
+    color: white;
+    border-radius: 7px;
+    padding: 10px;
+}
+.login .paginas .login_voltar:hover {
+    background-color: white;
+    color: black;
+    transition: 250ms;
+}
+.login .titulo_login {
+    margin: 50px 0px 0px 120px;
+    padding: 20px;
+}
+.login .titulo_login h2 {
+    font-family: 'Bangers', cursive;
+    color: white;
+}
+.login .dados_login {
+    flex-direction: column;
+    height: 450px;
+    border-radius: 20px 0px 0px 20px;
+    width: 440px;
+}
+.login .dados_login h3 {
     font-family: 'Bangers', cursive;
     padding: 20px;
-    margin: 80px 0px 15px 70px;
+    margin: 0px 0px 15px 180px;
+    color: white;
+    font-size: 23.5px;
 }
-.login_form .dados_login {
-    flex-direction: column;
-    background-color: white;
-    height: 440px;
-    border: 2px solid black;
-    border-radius: 20px 0px 0px 20px;
-    width: 420px;
-}
-.login_form .dados_login .campo_login {
+.login .dados_login .campo_login {
     padding: 20px;
+    margin: 0px 0px 0px 90px;
+    font-size: 20px;
+    color: white;
 }
-.login_form .dados_login .btn_entrar {
-    padding: 20px;
+.login .dados_login .campo_login input {
+    border-radius: 4px;
+    height: 20px;
+    width: 185px;
 }
-.login .login_form img {
-    height: 440px;
-    width: 640px;
-    border: 2px solid black;
-    border-radius: 0px 20px 20px 0px;
+.login .dados_login .btn_entrar {
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    margin: 0px 0px 0px 60px;
+}
+.login .dados_login .btn_entrar button {    
+    font-family: 'Bangers', cursive;
+    background-color: orange;
+    color: white;
+    border-radius: 8px;
+    padding: 5px;
+    height: 40px;
+    width: 120px;
+    font-size: 15px;
+}
+.login .dados_login .btn_entrar button:hover {
+    background-color: black;
+    color: white;
+    transition: 310ms;
+}
+.imagem_login {
+    margin: 0;
+}
+.imagem_login img{
+    display: flex;
+    justify-content: flex-end;
+    height: 640px;
+    width: 1000px;
 }
