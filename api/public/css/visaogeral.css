@@ -1,0 +1,30 @@
+body {
+    background-color: orange;
+    margin: 0;
+    display: flex;
+    font-family: 'Urbanist', sans-serif;
+}
+.barra_lateral {
+    background-color: black;
+    display: flex;
+    height: 608px;
+    width: 350px;
+    flex-direction: column;
+}
+.barra_lateral .card_msgUsuario {
+    color: white;
+}
+.barra_lateral .card_msgUsuario .icon_usuario {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 100px;
+    width: 100px;
+}
+.barra_lateral .card_msgUsuario h3 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-family: 'Bangers', cursive;
+    font-size: 20px;
+}
