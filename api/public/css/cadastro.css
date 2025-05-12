@@ -60,7 +60,7 @@ body {
     height: 25px;
     width: 200px;
 }
-.cadastro .dados_cadastro .campo_cadastro .input_dtNasc {
+.cadastro .dados_cadastro .campo_cadastro #input_dtNasc {
     margin: 0px 30px 0px 0px;
 }
 .cadastro .dados_cadastro .campo_cadastro b {

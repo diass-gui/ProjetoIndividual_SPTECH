@@ -95,6 +95,6 @@ body {
 .imagem_login img{
     display: flex;
     justify-content: flex-end;
-    height: 640px;
-    width: 1000px;
+    height: 100%;
+    width: 100%;
 }

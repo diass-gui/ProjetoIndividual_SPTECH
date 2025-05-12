@@ -24,23 +24,23 @@
                 </div>
                 <div class="campo_cadastro">
                     <b>Primeiro, digite o seu nome:</b>
-                    <input type="text" class="input_nome"><br>
+                    <input type="text" id="input_nome"><br>
                 </div>
                 <div class="campo_cadastro">
                     <b>Informe a sua data de nascimento:</b>
-                    <input type="date" class="input_dtNasc"><br>
+                    <input type="date" id="input_dtNasc"><br>
                 </div>
                     <div class="campo_cadastro">
                     <b>Digite o seu e-mail:</b>
-                    <input type="email" class="input_email"><br>
+                    <input type="email" id="input_email"><br>
                 </div>
                 <div class="campo_cadastro">
                     <b>Digite sua senha:</b>
-                    <input type="password" class="input_senha"><br>
+                    <input type="password" id="input_senha"><br>
                 </div>
                 <div class="campo_cadastro">
                     <b>Confirme sua senha:</b>
-                    <input type="password" class="input_confirmSenha"><br>
+                    <input type="password" id="input_confirmSenha"><br>
                 </div>
                 <div class="btn_cadastrar">
                     <button onclick="Cadastrar()">Cadastrar</button>
@@ -61,7 +61,69 @@
 <script>
 
     function Cadastrar() {
-        window.location="login.html";
-    }
 
+    //Recupere o valor da nova input pelo nome do id
+    // Agora vá para o método fetch logo abaixo
+    var nomeVar = input_nome.value;
+    var dtNascVar = input_dtNasc.value;
+    var emailVar = input_email.value;
+    var senhaVar = input_senha.value;
+    var confirmacaoSenhaVar = input_confirmSenha.value;
+
+    // Verificando se há algum campo em branco
+    if (
+      nomeVar == "" ||
+      dtNascVar == "" ||
+      emailVar == "" ||
+      senhaVar == "" ||
+      confirmacaoSenhaVar == ""
+    ) {
+      
+        return alert("Preencha todos os campos corretamente.");
+
+    } else {
+      setTimeout(sumirMensagem, 5000);
+    }
+    // Enviando o valor da nova input
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeVar,
+        dtNascServer: dtNascVar,
+        emailServer: emailVar,
+        senhaServer: senhaVar
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          cardErro.style.display = "block";
+
+          mensagem_erro.innerHTML =
+            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+          setTimeout(() => {
+            window.location = "login.html";
+          }, "2000");
+
+          limparFormulario();
+          finalizarAguardar();
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        finalizarAguardar();
+      });
+      
+      return false;
+    }
+        
 </script>
