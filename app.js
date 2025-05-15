@@ -27,6 +27,10 @@ app.use(cors());
 app.use("/", indexRouter);  
 app.use("/usuarios", usuarioRouter);
 
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'api', 'routes', 'index'));
+
 app.listen(PORTA_APP, function () {
     console.log(`
     ##   ##  ######   #####             ####       ##     ######     ##              ##  ##    ####    ######  
