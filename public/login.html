@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../public/css/index.css">
-    <link rel="stylesheet" href="../public/css/login.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/login.css">
     <title>Login | Voz da Quebrada</title>
 </head>
 <body>
@@ -25,11 +25,11 @@
                 <h3>Faça seu Login:</h3>
                 <div class="campo_login">
                     <b>E-Mail:</b>
-                    <input type="email" class="input_email">
+                    <input type="email" class="input_email" id="input_email">
                 </div>
                 <div class="campo_login">
                     <b>Senha:</b>
-                    <input type="password" class="input_senha" placeholder="**********">
+                    <input type="password" class="input_senha" id="input_senha" placeholder="**********">
                 </div>
                 <div class="btn_entrar">
                     <button onclick="entrar()">Entrar</button>
@@ -44,7 +44,7 @@
     </body>
 </html>
 
-<!-- <script>
+<script>
     
     function entrar() {
         //aguardar();
@@ -59,7 +59,7 @@
             return alert("Preencha todos os campos corretamente.");
         }
         else {
-            setTimeout(sumirMensagem, 5000)
+            setTimeout(2500)
         }
 
         // console.log("FORM LOGIN: ", emailVar);
@@ -110,4 +110,4 @@
         return false;
     }
     
-</script> -->
+</script>

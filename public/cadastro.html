@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../public/css/index.css">
-    <link rel="stylesheet" href="../public/css/cadastro.css">
+    <script src="../public/js/sessao.js"></script>
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/cadastro.css">
     <title>Cadastro | Voz da Quebrada</title>
 </head>
-<body>
+<body onload="validarSessao()">
         
     <div class="cadastro">
         <div class="paginas_cadastro">
@@ -27,12 +28,12 @@
                     <input type="text" id="input_nome"><br>
                 </div>
                 <div class="campo_cadastro">
+                  <b>Digite o seu e-mail:</b>
+                  <input type="email" id="input_email"><br>
+                </div>
+                <div class="campo_cadastro">
                     <b>Informe a sua data de nascimento:</b>
                     <input type="date" id="input_dtNasc"><br>
-                </div>
-                    <div class="campo_cadastro">
-                    <b>Digite o seu e-mail:</b>
-                    <input type="email" id="input_email"><br>
                 </div>
                 <div class="campo_cadastro">
                     <b>Digite sua senha:</b>
@@ -43,7 +44,7 @@
                     <input type="password" id="input_confirmSenha"><br>
                 </div>
                 <div class="btn_cadastrar">
-                    <button onclick="Cadastrar()">Cadastrar</button>
+                    <button onclick="cadastrar()">Cadastrar</button>
                 </div>
                 <div class="link_login">
                     <p><b>Já possui conta?</b> <a href="login.html">Clique aqui para realizar o seu login!</a></p>
@@ -52,21 +53,21 @@
             </div>
     </div>
     <div class="imagem_cadastro">
-        <img src="assets/imgs/foto_cadastro.jpg">
+        <img src="../assets/imgs/foto_cadastro.jpg">
     </div>
 
 </body>
 </html>
 
-<!-- <script>
+<script>
 
-    function Cadastrar() {
+    function cadastrar() {
 
     //Recupere o valor da nova input pelo nome do id
     // Agora vá para o método fetch logo abaixo
     var nomeVar = input_nome.value;
-    var dtNascVar = input_dtNasc.value;
     var emailVar = input_email.value;
+    var dtNascVar = input_dtNasc.value;
     var senhaVar = input_senha.value;
     var confirmacaoSenhaVar = input_confirmSenha.value;
 
@@ -82,7 +83,7 @@
         return alert("Preencha todos os campos corretamente.");
 
     } else {
-      setTimeout(sumirMensagem, 5000);
+      setTimeout(5000);
     }
     // Enviando o valor da nova input
     fetch("/usuarios/cadastrar", {
@@ -94,8 +95,8 @@
         // crie um atributo que recebe o valor recuperado aqui
         // Agora vá para o arquivo routes/usuario.js
         nomeServer: nomeVar,
-        dtNascServer: dtNascVar,
         emailServer: emailVar,
+        dtNascServer: dtNascVar,
         senhaServer: senhaVar
       }),
     })
@@ -103,27 +104,27 @@
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-          cardErro.style.display = "block";
+          // cardErro.style.display = "block";
 
-          mensagem_erro.innerHTML =
-            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+          // mensagem_erro.innerHTML =
+          //   "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
 
           setTimeout(() => {
             window.location = "login.html";
           }, "2000");
 
-          limparFormulario();
-          finalizarAguardar();
+          // limparFormulario();
+          // finalizarAguardar();
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
       })
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
-        finalizarAguardar();
+        // finalizarAguardar();
       });
       
       return false;
     }
         
-</script> -->
+</script>
