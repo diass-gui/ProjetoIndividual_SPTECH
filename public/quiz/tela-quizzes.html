@@ -3,11 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+    <script src="../js/sessao.js"></script>
+    <link rel="stylesheet" href="../css/tela-quizzes.css">
     <title>Selecione algum Quiz</title>
 </head>
-<body>
+<body onload="validarSessao()">
     
-    <div class=""
+    <div class="navbar-lateral">
+        <img src="../assets/imgs/logo_punho_removebg.png" alt="logo_VozQuebrada">
+        <div class="msg_user">
+            <h3>Olá, <span id="b_usuario"> usuário</span>!</h3>
+        </div>
+        <div class="paginas_navbar">
+            <div class="campo_navbar">
+                <h4><a href="../dashboard/visaogeral.html">Visão Geral</a></h4>
+            </div>
+            <div class="campo_navbar">
+                <h4><a href="../dashboard/visaogeral.html">Dashboards</a></h4>
+            </div>
+            <div class="campo_navbar">
+                <h4><a href="../dashboard/visaogeral.html">Visão Geral</a></h4>
+            </div>
+        </div>
+        <div class="btn-logout">
+            <button onclick="limparSessao()">Sair</button>
+        </div>
+    </div>
+
+    
+    <div class="quizzes">
+        <div class="msg_quizzes">
+            <h4>Escolha o seu quiz!</h4>
+        </div>
+
+        <div class="cards_quizzes">
+            <a href="../quiz/quiz_rap.html">
+                <div class="box-quiz">
+                    <div class="quiz_rap">
+                        <img src="../assets/icons/mc_elemento.png">
+                        <b>Rap/MC</b>
+                    </div>
+                </div></a>
+            <a href="../quiz/quiz_dj.html"><div class="box-quiz">
+                <div class="quiz_dj">
+                    <img src="../assets/icons/dj.png">
+                    <b>DJ</b>
+                </div>
+            </div></a>
+            <a href="../quiz/quiz_break.html"><div class="box-quiz">
+                <div class="quiz_break">
+                    <img src="../assets/icons/breakdance.png">
+                    <b>Breakdance</b>
+                </div>
+            </div></a>
+            <a href="../quiz/quiz_graffiti.html">
+                <div class="box-quiz">
+                <div class="quiz_graffiti">
+                    <img src="../assets/icons/graffiti.png">
+                    <b>Graffiti</b>
+                </div>
+            </div></a>
+             <a href="../quiz/quiz_geral.html"><div class="box-quiz">
+               <div class="quiz_especial">
+                    <img src="../assets/icons/icon_estrela.png">
+                    <b>Especial</b>
+                </div>
+            </div></a>
+        </div>
+    </div>
 
 </body>
 </html>
