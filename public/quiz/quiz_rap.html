@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+    <script src="../js/sessao.js"></script>
+    <link rel="stylesheet" href="../css/quiz-rap.css">
+    <title>Quiz - Rap/MC</title>
+</head>
+<body onload="validarSessao()">
+
+    <div class="quizRap">
+        <div class="msgQuiz_usuario">
+            <h2>Bem vindo ao Quiz sobre Rap, <span id="b_usuario">usuario</span>!</h2>
+        </div>
+        <div class="botoes">
+            <div class="btn_quiz">
+                <button onclick="iniciarQuiz()">Vamos Começar!</button>
+            </div>
+            <div class="btn_sairQuiz">
+                <button onclick="sairQuiz()">Voltar</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+<script>
+
+    function sairQuiz() {
+        window.location="../quiz/tela-quizzes.html";
+    }
+
+    function iniciarQuiz() {
+        quizRap.innerHTML+=`<div class="quizRap">
+            <p>Olá, primeira questao</p>
+            </div>`;
+    }
+
+</script>
