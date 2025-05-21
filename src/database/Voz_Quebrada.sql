@@ -26,6 +26,9 @@ CONSTRAINT pkComposta PRIMARY KEY (idPergunta, fkQuiz)
 
 CREATE TABLE Resposta (
 idResposta INT AUTO_INCREMENT,
+-- alternativaA VARCHAR(150), 
+-- alternativaB VARCHAR(150),
+-- alternativaC VARCHAR(150),
 resposta VARCHAR(150), 
 fkPergunta INT, 
 CONSTRAINT fkPergunta FOREIGN KEY (fkPergunta)
@@ -97,3 +100,5 @@ SELECT quiz.elementoQuiz AS 'Elemento do quiz',
     ON p.idPergunta = r.fkPergunta
     JOIN Quiz as quiz
     ON quiz.idQuiz = p.fkQuiz;
+
+SELECT * FROM Usuario;

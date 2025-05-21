@@ -75,7 +75,7 @@ body {
     border-radius: 16px;
 }
 .quizzes .cards_quizzes .box-quiz:hover {
-    height: 220px;
+    height: 218px;
     width: 220px;
     transition: 270ms;
 }

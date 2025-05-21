@@ -11,7 +11,7 @@
 </head>
 <body onload="validarSessao()">
 
-    <div class="quizRap">
+    <div class="quizRap"  id="div_quizRap">
         <div class="msgQuiz_usuario">
             <h2>Bem vindo ao Quiz sobre Rap, <span id="b_usuario">usuario</span>!</h2>
         </div>
@@ -29,15 +29,79 @@
 </html>
 
 <script>
+    // Vetor para armazenar todas as perguntas e suas respostas
+    var perguntasQuiz = [];
 
-    function sairQuiz() {
-        window.location="../quiz/tela-quizzes.html";
-    }
-
+    // Função chamada ao clicar no botão "Vamos Começar!"
     function iniciarQuiz() {
-        quizRap.innerHTML+=`<div class="quizRap">
-            <p>Olá, primeira questao</p>
-            </div>`;
+        // Faz uma requisição GET para a rota criada no backend
+        fetch("/quiz/rap")
+            .then(res => res.json()) // converte a resposta em JSON
+            .then(dados => {
+                // Agrupa as respostas por pergunta
+                perguntasQuiz = agruparPerguntas(dados);
+                // Exibe a primeira pergunta
+                renderizarPergunta(0);
+            })
+            .catch(erro => {
+                console.error("Erro ao carregar perguntas:", erro);
+            });
     }
 
+    // Função que agrupa respostas que pertencem à mesma pergunta
+    function agruparPerguntas(dados) {
+        const agrupadas = [];
+
+        dados.forEach((linha) => {
+            // Verifica se a pergunta já foi adicionada no vetor
+            let pergunta = agrupadas.find(p => p.idPergunta === linha.idPergunta);
+            if (!pergunta) {
+                // Se não, cria um novo objeto pergunta
+                pergunta = {
+                    idPergunta: linha.idPergunta,
+                    pergunta: linha.pergunta,
+                    respostas: []
+                };
+                agrupadas.push(pergunta);
+            }
+            // Adiciona a resposta à lista de respostas dessa pergunta
+            pergunta.respostas.push(linha.resposta);
+        });
+
+        return agrupadas;
+    }
+
+    // Mostra uma pergunta na tela com suas alternativas
+    function renderizarPergunta(indice) {
+        const perguntaAtual = perguntasQuiz[indice];
+
+        // Se não houver pergunta, terminou o quiz
+        if (!perguntaAtual) {
+            div_quizRap.innerHTML = "<p>Você terminou o quiz!</p>";
+            return;
+        }
+
+        // Cria o HTML dinamicamente com a pergunta e respostas
+        const html = `
+            <div class="quizRap">
+                <h3>${perguntaAtual.pergunta}</h3>
+                <ul>
+                    ${perguntaAtual.respostas.map(resp => `
+                        <li><button onclick="proximaPergunta(${indice + 1})">${resp}</button></li>
+                    `).join("")}
+                </ul>
+            </div>
+        `;
+        div_quizRap.innerHTML = html;
+    }
+
+    // Vai para a próxima pergunta
+    function proximaPergunta(indice) {
+        renderizarPergunta(indice);
+    }
+
+    // Voltar para tela anterior
+    function sairQuiz() {
+        window.location = "../quiz/tela-quizzes.html";
+    }
 </script>
