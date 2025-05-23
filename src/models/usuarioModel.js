@@ -22,7 +22,7 @@ function cadastrar(nome, email, dtNasc, senha) {
     return database.executar(instrucaoSql);
 }
 
-function buscarEmailPorId(email) {
+function buscarEmail(email) {
 
     var instrucaoSql = `SELECT * FROM Usuario WHERE email = '${email}'`;
 
@@ -33,5 +33,5 @@ function buscarEmailPorId(email) {
 module.exports = {
     autenticar,
     cadastrar,
-    buscarEmailPorId
+    buscarEmail
 };

@@ -3,11 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
     <script src="../js/sessao.js"></script>
     <link rel="stylesheet" href="../css/quiz-rap.css">
-    <title>Quiz Sobre Rap</title>
+    <title>Quiz - Rap/MC</title>
 </head>
-<body>
-    
+<body onload="validarSessao()">
+
+    <div class="quizRap"  id="div_quizRap">
+        <div class="msgQuiz_usuario">
+            <h2>Bem vindo ao Quiz sobre Rap, <span id="b_usuario">usuario</span>!</h2>
+        </div>
+        <div class="botoes">
+            <div class="btn_quiz">
+                <button onclick="iniciarQuiz()">Vamos Começar!</button>
+            </div>
+            <div class="btn_sairQuiz">
+                <button onclick="sairQuiz()">Voltar</button>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
+
+<script>
+    // Vetor para armazenar todas as perguntas e suas respostas
+    var perguntasQuiz = [];
+
+    // Função chamada ao clicar no botão "Vamos Começar!"
+    function iniciarQuiz() {
+        // Faz uma requisição GET para a rota criada no backend
+        fetch("/quiz/rap")
+            .then(res => res.json()) // converte a resposta em JSON
+            .then(dados => {
+                // Agrupa as respostas por pergunta
+                perguntasQuiz = agruparPerguntas(dados);
+                // Exibe a primeira pergunta
+                renderizarPergunta(0);
+            })
+            .catch(erro => {
+                console.error("Erro ao carregar perguntas:", erro);
+            });
+    }
+
+    // Função que agrupa respostas que pertencem à mesma pergunta
+    function agruparPerguntas(dados) {
+        const agrupadas = [];
+
+        dados.forEach((linha) => {
+            // Verifica se a pergunta já foi adicionada no vetor
+            let pergunta = agrupadas.find(p => p.idPergunta === linha.idPergunta);
+            if (!pergunta) {
+                // Se não, cria um novo objeto pergunta
+                pergunta = {
+                    idPergunta: linha.idPergunta,
+                    pergunta: linha.pergunta,
+                    respostas: []
+                };
+                agrupadas.push(pergunta);
+            }
+            // Adiciona a resposta à lista de respostas dessa pergunta
+            pergunta.respostas.push(linha.resposta);
+        });
+
+        return agrupadas;
+    }
+
+    // Mostra uma pergunta na tela com suas alternativas
+    function renderizarPergunta(indice) {
+        const perguntaAtual = perguntasQuiz[indice];
+
+        // Se não houver pergunta, terminou o quiz
+        if (!perguntaAtual) {
+            div_quizRap.innerHTML = "<p>Você terminou o quiz!</p>";
+            return;
+        }
+
+        // Cria o HTML dinamicamente com a pergunta e respostas
+        const html = `
+            <div class="quizRap">
+                <h3>${perguntaAtual.pergunta}</h3>
+                <ul>
+                    ${perguntaAtual.respostas.map(resp => `
+                        <li><button onclick="proximaPergunta(${indice + 1})">${resp}</button></li>
+                    `).join("")}
+                </ul>
+            </div>
+        `;
+        div_quizRap.innerHTML = html;
+    }
+
+    // Vai para a próxima pergunta
+    function proximaPergunta(indice) {
+        renderizarPergunta(indice);
+    }
+
+    // Voltar para tela anterior
+    function sairQuiz() {
+        window.location = "../quiz/tela-quizzes.html";
+    }
+</script>
