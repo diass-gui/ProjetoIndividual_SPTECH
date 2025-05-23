@@ -1,6 +1,6 @@
 var database = require("../database/config");
 
-function buscarPerguntasComRespostas() {
+function buscarPerguntasComRespostas(idQuiz) {
     var instrucao = `
         SELECT 
             p.idPergunta,
@@ -8,7 +8,7 @@ function buscarPerguntasComRespostas() {
             r.resposta
         FROM Perguntas p
         JOIN Resposta r ON r.fkPergunta = p.idPergunta
-        WHERE p.fkQuiz = 1
+        WHERE p.fkQuiz = ${idQuiz}
         ORDER BY p.idPergunta;
     `;
 

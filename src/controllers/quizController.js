@@ -1,7 +1,14 @@
 var quizModel = require("../models/quizModel");
 
 function listarPerguntasComRespostas(req, res) {
-    quizModel.buscarPerguntasComRespostas()
+
+    const idQuiz = parseInt(req.params.id);
+
+    if (isNaN(idQuiz)) {
+        return res.status(400).send("ID do quiz inválido.");
+    }
+
+    quizModel.buscarPerguntasComRespostas(Number(idQuiz))
         .then(resultado => {
             res.json(resultado); // envia os dados como JSON
         })

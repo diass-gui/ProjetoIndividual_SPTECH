@@ -67,8 +67,8 @@ body {
     text-decoration: none;
 }
 .quizzes .cards_quizzes .box-quiz {
-    height: 200px;
-    width: 200px;
+    height: 210px;
+    width: 210px;
     border: 2px solid black;
     box-sizing: border-box;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);

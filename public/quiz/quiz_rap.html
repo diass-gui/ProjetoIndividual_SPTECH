@@ -29,13 +29,23 @@
 </html>
 
 <script>
-    // Vetor para armazenar todas as perguntas e suas respostas
+     // Vetor para armazenar todas as perguntas e suas respostas
     var perguntasQuiz = [];
+
+    // Pega o ID do quiz pela URL (ex: quiz_rap.html?id=1)
+    const urlParams = new URLSearchParams(window.location.search);
+    const idQuiz = parseInt(urlParams.get("id"));
+
+    // Verifica se o ID é válido
+    if (isNaN(idQuiz)) {
+        alert("ID do quiz inválido!");
+        window.location.href = "../quiz/tela-quizzes.html";
+    }
 
     // Função chamada ao clicar no botão "Vamos Começar!"
     function iniciarQuiz() {
-        // Faz uma requisição GET para a rota criada no backend
-        fetch("/quiz/rap")
+        // Chama o backend passando o ID do quiz
+        fetch(`/quiz/perguntas/${idQuiz}`)
             .then(res => res.json()) // converte a resposta em JSON
             .then(dados => {
                 // Agrupa as respostas por pergunta
@@ -53,10 +63,8 @@
         const agrupadas = [];
 
         dados.forEach((linha) => {
-            // Verifica se a pergunta já foi adicionada no vetor
             let pergunta = agrupadas.find(p => p.idPergunta === linha.idPergunta);
             if (!pergunta) {
-                // Se não, cria um novo objeto pergunta
                 pergunta = {
                     idPergunta: linha.idPergunta,
                     pergunta: linha.pergunta,
@@ -64,7 +72,6 @@
                 };
                 agrupadas.push(pergunta);
             }
-            // Adiciona a resposta à lista de respostas dessa pergunta
             pergunta.respostas.push(linha.resposta);
         });
 
@@ -75,13 +82,11 @@
     function renderizarPergunta(indice) {
         const perguntaAtual = perguntasQuiz[indice];
 
-        // Se não houver pergunta, terminou o quiz
         if (!perguntaAtual) {
             div_quizRap.innerHTML = "<p>Você terminou o quiz!</p>";
             return;
         }
 
-        // Cria o HTML dinamicamente com a pergunta e respostas
         const html = `
             <div class="quizRap">
                 <h3>${perguntaAtual.pergunta}</h3>
