@@ -28,7 +28,7 @@ app.use(cors());
 
 app.use("/", indexRouter);  
 app.use("/usuarios", usuarioRouter);
-app.use("/quiz", quizRouter); // agora a rota /quiz/rap funciona
+app.use("/quiz", quizRouter); 
 
 app.listen(PORTA_APP, function () {
     console.log(`

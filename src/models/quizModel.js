@@ -1,20 +1,34 @@
 var database = require("../database/config");
 
-function buscarPerguntasComRespostas(idQuiz) {
+function buscarPerguntas(idQuiz) {
     var instrucao = `
         SELECT 
             p.idPergunta,
-            p.pergunta,
-            r.resposta
+            p.pergunta
         FROM Perguntas p
-        JOIN Resposta r ON r.fkPergunta = p.idPergunta
-        WHERE p.fkQuiz = ${idQuiz}
-        ORDER BY p.idPergunta;
+        JOIN Quiz AS q
+        ON q.idQuiz = p.fkQuiz
+        WHERE p.fkQuiz = ${idQuiz};
+    `;
+
+    return database.executar(instrucao);
+}
+
+function buscarRespostas(idQuiz) {
+    var instrucao = `
+    SELECT 
+        r.idResposta, 
+        r.resposta
+        FROM Resposta AS r
+        JOIN Perguntas AS p
+        ON p.idPergunta = r.fkPergunta
+        WHERE p.fkQuiz = ${idQuiz};
     `;
 
     return database.executar(instrucao);
 }
 
 module.exports = {
-    buscarPerguntasComRespostas
+    buscarPerguntas, 
+    buscarRespostas
 };

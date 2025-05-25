@@ -29,10 +29,11 @@
 </html>
 
 <script>
-     // Vetor para armazenar todas as perguntas e suas respostas
+    
     var perguntasQuiz = [];
+    var respostasQuiz = [];
+    var contador = 0;
 
-    // Pega o ID do quiz pela URL (ex: quiz_rap.html?id=1)
     const urlParams = new URLSearchParams(window.location.search);
     const idQuiz = parseInt(urlParams.get("id"));
 
@@ -42,71 +43,147 @@
         window.location.href = "../quiz/tela-quizzes.html";
     }
 
-    // Função chamada ao clicar no botão "Vamos Começar!"
-    function iniciarQuiz() {
-        // Chama o backend passando o ID do quiz
-        fetch(`/quiz/perguntas/${idQuiz}`)
-            .then(res => res.json()) // converte a resposta em JSON
-            .then(dados => {
-                // Agrupa as respostas por pergunta
-                perguntasQuiz = agruparPerguntas(dados);
-                // Exibe a primeira pergunta
-                renderizarPergunta(0);
-            })
-            .catch(erro => {
-                console.error("Erro ao carregar perguntas:", erro);
-            });
-    }
+    var alternativas = [{
+            idPergunta: 1, 
+            alternativaA: "Sobrevivendo no Inferno", 
+            alternativaB: "Hip Hop - Cultura de Rua", 
+            alternativaC: "Pergunte a Quem Conhece", 
+            alternativaD: "Escolha o Seu Caminho"
+        }, {
+            idPergunta: 2, 
+            alternativaA: "Cores e Valores", 
+            alternativaB: "Holocausto Urbano", 
+            alternativaC: "Nada Como Um Dia Após o Outro Dia", 
+            alternativaD: "Raio X do Brasil"
+        }, {
+            idPergunta: 3, 
+            alternativaA: "Detentos do Rap", 
+            alternativaB: "Sistema Negro", 
+            alternativaC: "509-E", 
+            alternativaD: "RZO"
+        }, {
+            idPergunta: 4, 
+            alternativaA: "BK", 
+            alternativaB: "Djonga", 
+            alternativaC: "Froid", 
+            alternativaD: "Don L"
+        }, {
+            idPergunta: 5, 
+            alternativaA: "Convoque seu Buda - Criolo", 
+            alternativaB: "Mil Faces de Um Homem Leal - Racionais MC'S", 
+            alternativaC: "Se Tu Lutas, Tu Conquistas - SNJ", 
+            alternativaD: "Mun Rá - Sabotage"
+        }, {
+            idPergunta: 6, 
+            alternativaA: "Criolo", 
+            alternativaB: "Dexter", 
+            alternativaC: "Eduardo Taddeo (Facção Central)", 
+            alternativaD: "Marcelo D2"
+        }, {
+            idPergunta: 7, 
+            alternativaA: "Edi Rock", 
+            alternativaB: "GOG", 
+            alternativaC: "Kaskão", 
+            alternativaD: "MV Bill"
+        }, {
+            idPergunta: 8, 
+            alternativaA: "2000", 
+            alternativaB: "1998", 
+            alternativaC: "2006", 
+            alternativaD: "2003"
+        }, {
+            idPergunta: 9, 
+            alternativaA: "Carlos Marighella", 
+            alternativaB: "Malcolm X", 
+            alternativaC: "Tim Maia", 
+            alternativaD: "Jorge Ben Jor"
+        }, {
+            idPergunta: 10, 
+            alternativaA: "Álbum Sobrevivendo no Inferno, do grupo Racionais MC'S", 
+            alternativaB: "Álbum Rap É Compromisso, do rapper Sabotage", 
+            alternativaC: "Álbum Provérbios 13, do grupo 509-E", 
+            alternativaD: "Álbum Castelos & Ruínas, do rapper BK"
+        }];
 
-    // Função que agrupa respostas que pertencem à mesma pergunta
-    function agruparPerguntas(dados) {
-        const agrupadas = [];
+    async function iniciarQuiz() {
 
-        dados.forEach((linha) => {
-            let pergunta = agrupadas.find(p => p.idPergunta === linha.idPergunta);
-            if (!pergunta) {
-                pergunta = {
-                    idPergunta: linha.idPergunta,
-                    pergunta: linha.pergunta,
-                    respostas: []
-                };
-                agrupadas.push(pergunta);
-            }
-            pergunta.respostas.push(linha.resposta);
+        // declaração do fetch para puxar as perguntas do BD
+        var fetch_perguntas = await fetch(`/quiz/perguntas/${idQuiz}`);
+        var dados_pergunta = await fetch_perguntas.json();
+        console.log(dados_pergunta);
+
+        // declaração do fetch para puxar as respostas do BD
+        var fetch_respostas = await fetch(`/quiz/respostas/${idQuiz}`);
+        var dados_resposta = await fetch_respostas.json();
+        console.log(dados_resposta);
+
+        // laço de repetição para incrementar as perguntas em uma array
+        dados_pergunta.forEach(pergunta => {
+            perguntasQuiz.push(pergunta.pergunta);
         });
 
-        return agrupadas;
+        // laço de repetição para incrementar as respostas em uma array
+        dados_resposta.forEach(resposta => {
+            respostasQuiz.push(resposta.resposta);
+        });
+
+        exibirPergunta(0);
+
     }
 
-    // Mostra uma pergunta na tela com suas alternativas
-    function renderizarPergunta(indice) {
-        const perguntaAtual = perguntasQuiz[indice];
+    function exibirPergunta(indice) {
 
-        if (!perguntaAtual) {
-            div_quizRap.innerHTML = "<p>Você terminou o quiz!</p>";
-            return;
-        }
+        var html = ``;
 
-        const html = `
-            <div class="quizRap">
-                <h3>${perguntaAtual.pergunta}</h3>
-                <ul>
-                    ${perguntaAtual.respostas.map(resp => `
-                        <li><button onclick="proximaPergunta(${indice + 1})">${resp}</button></li>
-                    `).join("")}
-                </ul>
+        contador++;
+        
+        if(contador > alternativas.length) {
+            html = `<div class='quizRap'>
+            <h2>Você terminou o quiz!</h2>
+            </div>`;
+            div_quizRap.innerHTML=html;
+            setTimeout(DirecionarParaDash, 3000);
+        };
+
+        html = `<div class="quizRap"> 
+            <h2>${indice+1}. ${perguntasQuiz[indice]}: <h2>
+                    <ul style="display: flex; flex-direction: column"> 
+                        <div>
+                            <input type="radio" name="opcao" class="input_radio">${alternativas[indice].alternativaA}</input>
+                        </div>
+                        <div>
+                            <input type="radio" name="opcao" class="input_radio">${alternativas[indice].alternativaB}</input>
+                        </div>
+                        <div>
+                            <input type="radio" name="opcao" class="input_radio">${alternativas[indice].alternativaC}</input>
+                        </div>
+                        <div>
+                            <input type="radio" name="opcao" class="input_radio">${alternativas[indice].alternativaD}</input>
+                        </div>
+                    </ul>
+                <button onclick="ProximaPergunta(${contador})">Prosseguir</button>
             </div>
-        `;
-        div_quizRap.innerHTML = html;
+           `;
+           
+        div_quizRap.innerHTML=html;
+
     }
 
-    // Vai para a próxima pergunta
-    function proximaPergunta(indice) {
-        renderizarPergunta(indice);
+    // Carregar próxima pergunta
+    function ProximaPergunta(contador) {
+        exibirPergunta(contador);
+    }
+
+    // Direcionar para a Dash
+    function DirecionarParaDash() {
+        window.location="../dashboard/dashboard.html";
     }
 
     // Voltar para tela anterior
     function sairQuiz() {
         window.location = "../quiz/tela-quizzes.html";
     }
+
+    // function 
+
 </script>
