@@ -36,7 +36,7 @@ CONSTRAINT pkCompostaResp PRIMARY KEY(idResposta, fkPergunta)
 CREATE TABLE Dashboard (
 fkUsuario INT,
 fkQuiz INT,
-idTentativa INT, 
+idTentativa INT AUTO_INCREMENT, 
 CONSTRAINT fkDashUser FOREIGN KEY (fkUsuario)
 	REFERENCES Usuario(idUsuario), 
 CONSTRAINT fkDashQuiz FOREIGN KEY (fkQuiz)
@@ -80,8 +80,8 @@ INSERT INTO Resposta VALUES
 (default, "Raio X do Brasil", 2), 
 (default, "509-E", 3), 
 (default, "BK", 4), 
-(default, "Mun Rá - do rapper Sabotage", 5), 
-(default, "O rapper Criolo", 6), 
+(default, "Mun Rá - Sabotage", 5), 
+(default, "Criolo", 6), 
 (default, "GOG", 7), 
 (default, "2003", 8), 
 (default, "Carlos Marighella", 9), 

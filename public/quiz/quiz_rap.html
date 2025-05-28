@@ -33,9 +33,11 @@
     var perguntasQuiz = [];
     var respostasQuiz = [];
     var contador = 0;
+    var contadorPontuacao = 0;
 
     const urlParams = new URLSearchParams(window.location.search);
     const idQuiz = parseInt(urlParams.get("id"));
+    const idUsuario = sessionStorage.ID_USUARIO;
 
     // Verifica se o ID é válido
     if (isNaN(idQuiz)) {
@@ -125,6 +127,7 @@
         // laço de repetição para incrementar as respostas em uma array
         dados_resposta.forEach(resposta => {
             respostasQuiz.push(resposta.resposta);
+            console.log(resposta.resposta);
         });
 
         exibirPergunta(0);
@@ -149,16 +152,16 @@
             <h2>${indice+1}. ${perguntasQuiz[indice]}: <h2>
                     <ul style="display: flex; flex-direction: column"> 
                         <div>
-                            <input type="radio" name="opcao" class="input_radio">${alternativas[indice].alternativaA}</input>
+                            <input type="radio" name="opcao" class="input_radio" onclick="pontuarPergunta('${alternativas[indice].alternativaA}')">${alternativas[indice].alternativaA}</input>
                         </div>
                         <div>
-                            <input type="radio" name="opcao" class="input_radio">${alternativas[indice].alternativaB}</input>
+                            <input type="radio" name="opcao" class="input_radio" onclick="pontuarPergunta('${alternativas[indice].alternativaB}')">${alternativas[indice].alternativaB}</input>
                         </div>
                         <div>
-                            <input type="radio" name="opcao" class="input_radio">${alternativas[indice].alternativaC}</input>
+                            <input type="radio" name="opcao" class="input_radio" onclick="pontuarPergunta('${alternativas[indice].alternativaC}')">${alternativas[indice].alternativaC}</input>
                         </div>
                         <div>
-                            <input type="radio" name="opcao" class="input_radio">${alternativas[indice].alternativaD}</input>
+                            <input type="radio" name="opcao" class="input_radio" onclick="pontuarPergunta('${alternativas[indice].alternativaD}')">${alternativas[indice].alternativaD}</input>
                         </div>
                     </ul>
                 <button onclick="ProximaPergunta(${contador})">Prosseguir</button>
@@ -184,6 +187,20 @@
         window.location = "../quiz/tela-quizzes.html";
     }
 
-    // function 
+    // Realizar a contagem dos pontos
+    function pontuarPergunta(texto) {
+
+        console.log(texto);
+
+        if(respostasQuiz.includes(texto)) {
+            console.log("Certo");
+            contadorPontuacao++;
+            console.log(contadorPontuacao);
+        } else {
+            console.log("Errado");
+            console.log(contadorPontuacao);
+        }
+
+    }
 
 </script>

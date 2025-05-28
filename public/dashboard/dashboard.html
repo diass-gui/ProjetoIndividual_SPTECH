@@ -3,11 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/sessao.js"></script>
+    <link rel="stylesheet" href="/public/css/tela-quizzes.css">
+    <link rel="stylesheet" href="/public/css/dash.css">
+    <title>Dashboard | Voz da Quebrada</title>
 </head>
-<body>
+<body onload="validarSessao()">
     
-    <h1>Gabriel </h1>
+   <div class="navbar-lateral">
+        <img src="../assets/imgs/logo_punho_removebg.png" alt="logo_VozQuebrada">
+        <div class="msg_user">
+            <h3>Olá, <span id="b_usuario"> usuário</span>!</h3>
+        </div>
+        <div class="paginas_navbar">
+            <div class="campo_navbar">
+                <h4><a href="../dashboard/visaogeral.html">Visão Geral</a></h4>
+            </div>
+            <div class="campo_navbar">
+                <h4><a href="../dashboard/visaogeral.html">Dashboards</a></h4>
+            </div>
+        </div>
+        <div class="btn-logout">
+            <button onclick="limparSessao()">Sair</button>
+        </div>
+    </div>
+
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
 
 </body>
 </html>
+
+<script>
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>

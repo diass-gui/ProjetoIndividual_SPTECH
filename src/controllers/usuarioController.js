@@ -18,17 +18,19 @@ function autenticar(req, res) {
 
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
+                        console.log(resultadoAutenticar.id);
 
                         usuarioModel.buscarEmail(resultadoAutenticar[0].email)
                             .then((resultadoAquarios) => {
                                 if (resultadoAquarios.length > 0) {
                                     res.json({
-                                        id: resultadoAutenticar[0].id,
+                                        id: resultadoAutenticar[0].idUsuario,
                                         nome: resultadoAutenticar[0].nome,
                                         email: resultadoAutenticar[0].email,
                                         dtNasc: resultadoAutenticar[0].dtNasc,
                                         senha: resultadoAutenticar[0].senha
                                     });
+                                    console.log(resultadoAquarios.idUsuario);
                                 } else {
                                     res.status(204).json({ error });
                                 }
