@@ -34,14 +34,14 @@ CONSTRAINT pkCompostaResp PRIMARY KEY(idResposta, fkPergunta)
 );
 
 CREATE TABLE Dashboard (
+idTentativa INT AUTO_INCREMENT,
 fkUsuario INT,
-fkQuiz INT,
-idTentativa INT AUTO_INCREMENT, 
+fkQuiz INT, 
 CONSTRAINT fkDashUser FOREIGN KEY (fkUsuario)
 	REFERENCES Usuario(idUsuario), 
 CONSTRAINT fkDashQuiz FOREIGN KEY (fkQuiz)
 	REFERENCES Quiz(idQuiz), 
-CONSTRAINT pkCompostaDash PRIMARY KEY(fkUsuario, fkQuiz, idTentativa), 
+PRIMARY KEY(idTentativa, fkUsuario, fkQuiz), 
 pontuacao INT
 );
 
@@ -116,3 +116,5 @@ SELECT
 	JOIN Quiz AS q
 	ON q.idQuiz = p.fkQuiz
 	WHERE p.fkQuiz = 1;
+
+SHOW TABLES;

@@ -38,7 +38,31 @@ function listarRespostas(req, res) {
 
 }
 
+function enviarResposta(req, res) {
+
+    const idQuiz = parseInt(req.params.id);
+
+    const idUsuario = sessionStorage.ID_USUARIO;
+
+    var qtdAcertos = req.params.pontuacao;
+
+    if (isNaN(idQuiz)) {
+        return res.status(400).send("ID do quiz inválido.");
+    }
+
+    quizModel.enviarRespostas(idQuiz, idUsuario, qtdAcertos)
+        .then(resultado => {
+            res.json(resultado); // envia os dados como JSON
+        })
+        .catch(erro => {
+            console.error("Erro ao buscar perguntas e respostas: ", erro.sqlMessage);
+            res.status(500).send("Erro ao buscar perguntas e respostas.");
+        });
+
+}
+
 module.exports = {
     listarPerguntas, 
-    listarRespostas
+    listarRespostas, 
+    enviarResposta
 };

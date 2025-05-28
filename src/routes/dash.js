@@ -3,6 +3,3 @@ var router = express.Router();
 
 var dashController = require("../controllers/dashController");
 
-router.post("/dashboard/:id", function(req, res) {
-    
-});
