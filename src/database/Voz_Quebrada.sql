@@ -117,4 +117,66 @@ SELECT
 	ON q.idQuiz = p.fkQuiz
 	WHERE p.fkQuiz = 1;
 
-SHOW TABLES;
+-- inserts do quiz de graffiti
+INSERT INTO Perguntas(pergunta, fkQuiz) VALUES
+("Qual cidade é considerada o berço do Graffiti no Brasil?", 4),
+("Qual o nome real da dupla de artistas 'Os Gêmeos'?", 4), 
+("Qual característica diferencia o Graffiti da pixação?", 4),
+("O que é uma Crew?", 4), 
+("Que função social o graffiti passou a cumprir nas comunidades brasileiras?", 4), 
+("O Graffiti nacional tem forte ligação com qual movimento cultural?", 4), 
+("Em qual década houve um grande crescimento dos Crews no país?", 4), 
+("Além dos 'Gêmeos', Qual o outro famoso graffiteiro brasileiro, com fama internacional?", 4), 
+("Qual desses artistas iniciou sua carreira pintando trens e metrôs em São Paulo?", 4), 
+("Qual é uma das formas que o graffiti contribui com a educação nas comunidades?", 4);
+
+SELECT * FROM Perguntas WHERE fkQuiz = 4;
+
+INSERT INTO Resposta(resposta, fkPergunta) VALUES
+("São Paulo", 11), 
+("Otávio e Gustavo Pandolfo", 12), 
+("O graffiti é considerado arte, e a pichação, protesto visual", 13), 
+("Grupo de grafiteiros que atuam juntos", 14), 
+("Forma de expressão e resistência cultural", 15), 
+("Hip Hop", 16), 
+("Anos 80", 17), 
+("Eduardo 'Kobra'", 18), 
+("Tinho", 19), 
+("Oferecendo oficinas de arte urbana e cidadania", 20);
+
+SELECT * FROM Resposta;
+
+SELECT p.pergunta,
+        r.idResposta, 
+        r.resposta
+        FROM Resposta AS r
+        JOIN Perguntas AS p
+        ON p.idPergunta = r.fkPergunta
+        WHERE p.fkQuiz = 4;
+
+INSERT INTO Perguntas(pergunta, fkQuiz) VALUES 
+("Como se chamam os praticantes do Breakdance?", 3), 
+("Quem é considerado um dos pioneiros do breakdance no Brasil, com atuação desde os anos 1980?", 3), 
+("Qual desses grupos ajudou a expandir o cenário do Breakdance no Brasil?", 3), 
+("Qual importante evento internacional de Breakdance já contou com brasileiros como finalistas ou campeões?", 3), 
+("O breakdance se tornou oficialmente uma modalidade olímpica em qual edição dos Jogos Olímpicos?", 3), 
+("Como o breakdance tem impactado positivamente jovens de periferia no país?", 3), 
+("Qual desses artistas é conhecido por incentivar o break nas periferias através de projetos sociais?", 3), 
+("Qual das opções representa um elemento tradicional das batalhas de Breakdance?", 3), 
+("O que significa a sigla 'B-Boy'?", 3), 
+("Qual é a principal música usada nas batalhas de breakdance?", 3);
+
+SELECT * FROM Perguntas WHERE fkQuiz = 3;
+
+INSERT INTO Resposta(resposta, fkPergunta) VALUES
+("B-Boys e B-Girls", 21), 
+("Marcelinho Back Spin", 22), 
+("Street Warriors", 23), 
+("Red Bull BC One", 24), 
+("Jogos Olímpicos de Paris - 2024", 25), 
+("Promovendo inclusão, disciplina e expressão artística", 26), 
+("Nelson Triunfo", 27), 
+("Cypher(roda de dança)", 28), 
+("Break-Boy", 29), 
+("Breakbeat e Funk americano dos anos 70/80", 30);
+ 

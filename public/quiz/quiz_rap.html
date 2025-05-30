@@ -148,20 +148,27 @@
             setTimeout(DirecionarParaDash, 3000);
         };
 
+    let indiceAlt = alternativas[indice];
+
+    let altA = indiceAlt.alternativaA.replace(/'/g, "\\'");
+    let altB = indiceAlt.alternativaB.replace(/'/g, "\\'");
+    let altC = indiceAlt.alternativaC.replace(/'/g, "\\'");
+    let altD = indiceAlt.alternativaD.replace(/'/g, "\\'");
+
         html = `<div class="quizRap"> 
             <h2>${indice+1}. ${perguntasQuiz[indice]}: <h2>
                     <ul style="display: flex; flex-direction: column"> 
                         <div>
-                            <input type="radio" name="opcao" class="input_radio" onclick="pontuarPergunta('${alternativas[indice].alternativaA}')">${alternativas[indice].alternativaA}</input>
+                            <input type="radio" name="opcao" class="input_radio" onclick="pontuarPergunta('${altA}')">${alternativas[indice].alternativaA}</input>
                         </div>
                         <div>
-                            <input type="radio" name="opcao" class="input_radio" onclick="pontuarPergunta('${alternativas[indice].alternativaB}')">${alternativas[indice].alternativaB}</input>
+                            <input type="radio" name="opcao" class="input_radio" onclick="pontuarPergunta('${altB}')">${alternativas[indice].alternativaB}</input>
                         </div>
                         <div>
-                            <input type="radio" name="opcao" class="input_radio" onclick="pontuarPergunta('${alternativas[indice].alternativaC}')">${alternativas[indice].alternativaC}</input>
+                            <input type="radio" name="opcao" class="input_radio" onclick="pontuarPergunta('${altC}')">${alternativas[indice].alternativaC}</input>
                         </div>
                         <div>
-                            <input type="radio" name="opcao" class="input_radio" onclick="pontuarPergunta('${alternativas[indice].alternativaD}')">${alternativas[indice].alternativaD}</input>
+                            <input type="radio" name="opcao" class="input_radio" onclick="pontuarPergunta('${altD}')">${alternativas[indice].alternativaD}</input>
                         </div>
                     </ul>
                 <button onclick="ProximaPergunta(${contador})">Prosseguir</button>
@@ -194,13 +201,13 @@
 
         if(respostasQuiz.includes(texto)) {
             console.log("Certo");
-            contadorPontuacao++;
-            console.log(contadorPontuacao);
+            contadorAcerto++;
+            console.log(`Acertos: ${contadorAcerto}`);
         } else {
             console.log("Errado");
-            console.log(contadorPontuacao);
+            contadorErro++;
+            console.log(`Erros: ${contadorErro}`);
         }
-
     }
 
 </script>
