@@ -41,9 +41,7 @@ function listarRespostas(req, res) {
 function enviarResposta(req, res) {
 
     const idQuiz = parseInt(req.params.id);
-
     const idUsuario = sessionStorage.ID_USUARIO;
-
     var qtdAcertos = req.params.pontuacao;
 
     if (isNaN(idQuiz)) {

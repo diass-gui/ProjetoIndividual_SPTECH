@@ -7,9 +7,9 @@ function inserirPontuacao(idUsuario, idQuiz, pontuacao) {
     return database.executar(instrucao);
 }
 
-function exibirDadosTentativa(idUsuario, idQuiz)
+// function exibirTentativa(idUsuario, idQuiz)
 
-module.exports {
-    inserirPontuacao, 
-
+module.exports = {
+    inserirPontuacao
+    // exibirTentativa
 }

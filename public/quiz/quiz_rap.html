@@ -33,9 +33,10 @@
     var perguntasQuiz = [];
     var respostasQuiz = [];
     var contador = 0;
-    var contadorPontuacao = 0;
+    let contadorAcerto = 0;
+    let contadorErro = 0;
 
-    const urlParams = new URLSearchParams(window.location.search);
+    const urlParams_quiz = new URLSearchParams(window.location.search);
     const idQuiz = parseInt(urlParams.get("id"));
     const idUsuario = sessionStorage.ID_USUARIO;
 
@@ -201,13 +202,49 @@
 
         if(respostasQuiz.includes(texto)) {
             console.log("Certo");
-            contadorAcerto++;
+            contadorAcerto++
             console.log(`Acertos: ${contadorAcerto}`);
         } else {
             console.log("Errado");
-            contadorErro++;
+            contadorErro++
             console.log(`Erros: ${contadorErro}`);
         }
+        
+        enviarPontuacao(contadorAcerto);
+
     }
 
+    function enviarPontuacao(Pontuacao) {
+
+        fetch(`/dashboard/${idUsuario}/${idQuiz}/${pontuacao}`, {
+            method: "POST", 
+            headers: {
+                "Content-Type" : "application/json",
+            }, 
+        body: JSON.stringify({
+
+        idUsuarioServer: idUsuario, 
+        idQuizServer: idQuiz, 
+        pontuacaoServer: contadorAcerto
+        
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+
+          setTimeout(() => {
+            window.location = "login.html";
+          }, "1400");
+
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+    }
 </script>
