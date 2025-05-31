@@ -3,9 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+    <script src="../js/sessao.js"></script>
+    <link rel="stylesheet" href="../css/quiz-geral.css">
+    <title>Quiz - Especial</title>
 </head>
-<body>
+<body onload="validarSessao()">
     
+<div class="quizEspecial"  id="div_quizEspecial">
+        <div class="msgQuiz_usuario">
+            <h2>Bem vindo ao Quiz sobre Graffiti, <span id="b_usuario">usuario</span>!</h2>
+        </div>
+        <div class="botoes">
+            <div class="btn_quiz">
+                <button onclick="iniciarQuiz()">Vamos Começar!</button>
+            </div>
+            <div class="btn_sairQuiz">
+                <button onclick="sairQuiz()">Voltar</button>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
+
+<script>
+
+    var perguntasQuiz = [];
+    var respostasQuiz = [];
+    var contador = 0;
+    var contadorAcerto = 0;
+    var contadorErro = 0;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const idQuiz = parseInt(urlParams.get("id"));
+    const idUsuario = sessionStorage.ID_USUARIO;
+
+    // Verifica se o ID é válido
+    if (isNaN(idQuiz)) {
+        alert("ID do quiz inválido!");
+        window.location.href = "../quiz/tela-quizzes.html";
+    }
+
+    var alternativas = [{
+    idPergunta: 41,
+    alternativaA: "Grandmaster Flash",
+    alternativaB: "DJ Kool Herc",         
+    alternativaC: "Afrika Bambaataa",
+    alternativaD: "DJ Premier"
+}, {
+    idPergunta: 42,
+    alternativaA: "Dança de rua competitiva",
+    alternativaB: "Competição de poesia falada onde poetas recitam versos autorais em frente a um público", 
+    alternativaC: "Sessão de DJ ao vivo",
+    alternativaD: "Batalha de MCs"
+}, {
+    idPergunta: 43,
+    alternativaA: "Harlem, Nova York",
+    alternativaB: "Brooklyn, Nova York",
+    alternativaC: "Bronx, Nova York",      
+    alternativaD: "Queens, Nova York"
+}, {
+    idPergunta: 44,
+    alternativaA: "Anos 60",
+    alternativaB: "Anos 70",               
+    alternativaC: "Anos 80",
+    alternativaD: "Anos 90"
+}, {
+    idPergunta: 45,
+    alternativaA: "Primeira obra cinematográfica a retratar todos os quatro elementos do Hip Hop", 
+    alternativaB: "Primeiro documentário sobre breakdance",
+    alternativaC: "Filme sobre DJs famosos",
+    alternativaD: "Filme biográfico de Tupac"
+}, {
+    idPergunta: 46,
+    alternativaA: "Rádio Globo FM",
+    alternativaB: "Rádio Cultura",
+    alternativaC: "Espaço Rap - 105 FM",    
+    alternativaD: "Rádio Transamérica"
+}, {
+    idPergunta: 47,
+    alternativaA: "Primeira obra cinematográfica a retratar todos os quatro elementos do Hip Hop",  
+    alternativaB: "Programa que criou a breakdance",
+    alternativaC: "Programa de TV sobre música eletrônica",
+    alternativaD: "Festival internacional de hip hop"
+}, {
+    idPergunta: 48,
+    alternativaA: "Samba e Bossa Nova",
+    alternativaB: "Disco e Funk",            
+    alternativaC: "Rock e Pop",
+    alternativaD: "Jazz e Blues"
+}, {
+    idPergunta: 49,
+    alternativaA: "Jay-Z",
+    alternativaB: "Nas",                   
+    alternativaC: "Tupac Shakur",
+    alternativaD: "The Notorious B.I.G."
+}, {
+    idPergunta: 50,
+    alternativaA: "Fortaleceu a identidade cultural, promoveu inclusão social e deu voz às comunidades marginalizadas",  
+    alternativaB: "Aumentou o consumo de música pop",
+    alternativaC: "Consolidou o rap comercial",
+    alternativaD: "Incentivou festas exclusivas para artistas"
+}];
+
+
+    async function iniciarQuiz() {
+
+        // declaração do fetch para puxar as perguntas do BD
+        var fetch_perguntas = await fetch(`/quiz/perguntas/${idQuiz}`);
+        var dados_pergunta = await fetch_perguntas.json();
+        console.log(dados_pergunta);
+
+        // declaração do fetch para puxar as respostas do BD
+        var fetch_respostas = await fetch(`/quiz/respostas/${idQuiz}`);
+        var dados_resposta = await fetch_respostas.json();
+        console.log(dados_resposta);
+
+        // laço de repetição para incrementar as perguntas em uma array
+        dados_pergunta.forEach(pergunta => {
+            perguntasQuiz.push(pergunta.pergunta);
+        });
+
+        // laço de repetição para incrementar as respostas em uma array
+        dados_resposta.forEach(resposta => {
+            respostasQuiz.push(resposta.resposta);
+            console.log(resposta.resposta);
+        });
+
+        exibirPergunta(0);
+
+    }
+
+    function exibirPergunta(indice) {
+
+        var html = ``;
+
+        contador++;
+        
+        if(contador > alternativas.length) {
+            html = `<div class='quizEspecial'>
+            <h2>Você terminou o quiz!</h2>
+            </div>`;
+            div_quizEspecial.innerHTML=html;
+            setTimeout(DirecionarParaDash, 3000);
+        };
+
+    let indiceAlt = alternativas[indice];
+
+    let altA = indiceAlt.alternativaA.replace(/'/g, "\\'");
+    let altB = indiceAlt.alternativaB.replace(/'/g, "\\'");
+    let altC = indiceAlt.alternativaC.replace(/'/g, "\\'");
+    let altD = indiceAlt.alternativaD.replace(/'/g, "\\'");
+
+        html = `<div class="quizEspecial"> 
+            <h2>${indice+1}. ${perguntasQuiz[indice]}: <h2>
+                    <ul style="display: flex; flex-direction: column"> 
+                        <div>
+                            <input type="radio" name="opcao" class="input_radio" onclick="pontuarPergunta('${altA}')">${alternativas[indice].alternativaA}</input>
+                        </div>
+                        <div>
+                            <input type="radio" name="opcao" class="input_radio" onclick="pontuarPergunta('${altB}')">${alternativas[indice].alternativaB}</input>
+                        </div>
+                        <div>
+                            <input type="radio" name="opcao" class="input_radio" onclick="pontuarPergunta('${altC}')">${alternativas[indice].alternativaC}</input>
+                        </div>
+                        <div>
+                            <input type="radio" name="opcao" class="input_radio" onclick="pontuarPergunta('${altD}')">${alternativas[indice].alternativaD}</input>
+                        </div>
+                    </ul>
+                <button onclick="ProximaPergunta(${contador})">Prosseguir</button>
+            </div>
+           `;
+           
+        div_quizEspecial.innerHTML=html;
+
+    }
+
+    // Carregar próxima pergunta
+    function ProximaPergunta(contador) {
+        exibirPergunta(contador);
+    }
+
+    // Direcionar para a Dash
+    function DirecionarParaDash() {
+        window.location="../dashboard/dashboard.html";
+    }
+
+    // Voltar para tela anterior
+    function sairQuiz() {
+        window.location = "../quiz/tela-quizzes.html";
+    }
+
+    // Realizar a contagem dos pontos
+    function pontuarPergunta(texto) {
+
+        console.log(texto);
+
+        if(respostasQuiz.includes(texto)) {
+            console.log("Certo");
+            contadorAcerto++;
+            console.log(`Acertos: ${contadorAcerto}`);
+        } else {
+            console.log("Errado");
+            contadorErro++;
+            console.log(`Erros: ${contadorErro}`);
+        }
+    }
+
+</script>

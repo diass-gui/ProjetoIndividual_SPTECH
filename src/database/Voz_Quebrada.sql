@@ -87,8 +87,6 @@ INSERT INTO Resposta VALUES
 (default, "Carlos Marighella", 9), 
 (default, "Álbum Sobrevivendo no Inferno, do grupo Racionais MC'S", 10);
 
-SELECT * FROM Alternativa;
-
 SELECT quiz.elementoQuiz AS 'Elemento do quiz', 
 	p.pergunta AS 'Pergunta', 
     r.resposta AS 'Resposta'
@@ -104,7 +102,7 @@ SELECT
 	r.idResposta, 
 	r.resposta
 	FROM Resposta AS r
-	JOIN Pergunta AS p
+	JOIN Perguntas AS p
 	ON p.idPergunta = r.fkPergunta
 	WHERE fkQuiz = 1
 ORDER BY r.idResposta;
@@ -208,3 +206,38 @@ INSERT INTO Resposta(resposta, fkPergunta) VALUES
 ("Rádios comunitárias", 40);
 
 SELECT * FROM Resposta;
+
+INSERT INTO Perguntas(pergunta, fkQuiz) VALUES 
+("Qual o artista reconhecido como fundador e precursor do Hip Hop?", 5), 
+("O que é o SLAM?", 5), 
+("Qual é considerado o berço do Hip Hop, localizado nos Estados Unidos?", 5), 
+("Em qual década o Hip Hop surgiu nos Estados Unidos?", 5), 
+("Qual a importância do filme 'Wild Style(1983)' para o Hip Hop?", 5), 
+("Qual o nome de uma famosa estação de rádio brasileira focada em Hip Hop?", 5), 
+("Qual foi a importância do programa 'Yo! MTV Raps', lançado em 1988?", 5), 
+("Qual desses estilos musicais influenciou diretamente o nascimento do Hip Hop?", 5),
+("Qual rapper americano se destacou nos anos 90 com o disco 'Illmatic'?", 5), 
+("Qual foi o impacto cultural do hip hop nas periferias do Brasil e como ele transformou a expressão da juventude?", 5);
+
+SELECT * FROM Perguntas WHERE fkQuiz = 5;
+
+INSERT INTO Resposta(resposta, fkPergunta) VALUES
+("DJ Kool Herc", 41), 
+("Competição de poesia falada onde poetas recitam versos autorais em frente a um público", 42), 
+("Bronx, Nova York", 43), 
+("Anos 70", 44),
+("Primeira obra cinematográfica a retratar todos os quatro elementos do Hip Hop", 45),
+("Espaço Rap - 105 FM", 46), 
+("Primeira obra cinematográfica a retratar todos os quatro elementos do Hip Hop", 47), 
+("Disco e Funk", 48), 
+("Nas", 49), 
+("Fortaleceu a identidade cultural, promoveu inclusão social e deu voz às comunidades marginalizadas", 50);
+
+SELECT p.pergunta,
+        r.idResposta, 
+        r.resposta
+        FROM Resposta AS r
+        JOIN Perguntas AS p
+        ON p.idPergunta = r.fkPergunta
+        WHERE p.fkQuiz = 5;
+        

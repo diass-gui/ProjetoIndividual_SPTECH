@@ -20,8 +20,8 @@
             <div class="campo_navbar">
                 <h4><a href="../dashboard/visaogeral.html">Visão Geral</a></h4>
             </div>
-            <div class="campo_navbar">
-                <h4><a href="../dashboard/visaogeral.html">Dashboards</a></h4>
+            <div class="campo_navbar" id="div_lista_dashboards">
+                <h4><a onclick="exibirListaDashboards()">Dashboards</a></h4>
             </div>
         </div>
         <div class="btn-logout">
@@ -73,3 +73,24 @@
 
 </body>
 </html>
+
+<script>
+
+    function exibirListaDashboards() {
+
+        var html = ``;
+
+        html = `<h3>Dashboards</h3>
+                    <ul style="display: flex; flex-direction: column">
+                        <a href="../dashboard/dashboard.html?=1">Quiz - Rap/MC</a>
+                        <a href="../dashboard/dashboard.html?=2">Quiz - DJ</a>
+                        <a href="../dashboard/dashboard.html?=3">Quiz - Breakdance</a>
+                        <a href="../dashboard/dashboard.html?=4">Quiz - Graffiti</a>
+                        <a href="../dashboard/dashboard.html?=5">Quiz - Especial</a>
+                    <ul>`;
+
+        div_lista_dashboards.innerHTML=html;
+
+    }
+
+</script>

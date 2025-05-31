@@ -36,7 +36,7 @@
     let contadorAcerto = 0;
     let contadorErro = 0;
 
-    const urlParams_quiz = new URLSearchParams(window.location.search);
+    const urlParams = new URLSearchParams(window.location.search);
     const idQuiz = parseInt(urlParams.get("id"));
     const idUsuario = sessionStorage.ID_USUARIO;
 

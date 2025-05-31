@@ -1,0 +1,64 @@
+body {
+    display: flex;
+    margin: 0; 
+    background-image: url("../assets/imgs/imagemcopia-djkljay.jpg");
+    background-size: cover;
+    justify-content: center;
+    font-family: 'Urbanist', sans-serif;
+}
+.quizDJ {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    background-color: black;
+    width: 80vh;
+    height: 50vh;
+    justify-content: center;
+    padding: 30px;
+    margin-top: 120px;
+    opacity: 0.85;
+    border-radius: 12px;
+    align-items: center;
+}
+.quizDJ .msgQuiz_usuario h2 {
+    font-family: 'Bangers', cursive;
+    font-size: 30px;
+}
+.quizDJ .botoes {
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
+}
+.quizDJ .botoes .btn_quiz {
+    margin-right: 75px;
+}
+.quizDJ .botoes .btn_quiz button {
+    background-color: orange;
+    color: white;
+    border: 2px solid black;
+    border-radius: 7px;
+    padding: 15px;
+    font-family: 'Bangers', cursive;
+    font-size: 19px;
+}
+.quizDJ .botoes .btn_quiz button:hover {
+    background-color: black;
+    color: white;
+    transition: 220ms;
+}
+.quizDJ .botoes .btn_sairQuiz button {
+    background-color: white;
+    font-family: 'Bangers', cursive;
+    color: black;
+    padding: 10px;
+    border: 1px solid white;
+    border-radius: 7px;
+    width: 15vh;
+    margin-top: 5px;
+}
+.quizDJ .botoes .btn_sairQuiz button:hover {
+    background-color: black;
+    border: 1px solid black;
+    color: white;
+    transition: 220ms;
+}
