@@ -1,4 +1,76 @@
 body {
-    background-color: black;
+    background-color: #f0f0f0;
     margin: 0;
+    font-family: 'Urbanist', sans-serif;
+    color: #333;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.titulo_dashboard {
+    display: flex;
+    margin-left: 40px;
+    padding-top: 20px;
+}
+
+.titulo_dashboard h2 {
+    color: orange;
+    font-family: 'Bangers', cursive;
+    font-weight: 400;
+    font-size: 32px;
+    letter-spacing: 1px;
+}
+
+.tela_dashboard {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    width: 100%;
+    margin: 0;
+}
+
+.tela_dashboard .grafico {
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 30px;
+    padding: 40px 10px;
+}
+
+.tela_dashboard .grafico canvas {
+    width: 60% !important;
+    height: 60vh !important;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+}
+
+.tela_dashboard .grafico .indicadores {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 60vh;
+    gap: 20px;
+}
+
+.tela_dashboard .indicadores .indicador {
+    background-color: #ffffff;
+    border-radius: 10px;                /* ↓ Bordas menos arredondadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Sombra mais sutil */
+    border: 1px solid #e0e0e0;          /* Adiciona uma borda leve */
+    width: 300px;
+    padding: 24px;
+    color: #333;
+    font-size: 16px;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
 }

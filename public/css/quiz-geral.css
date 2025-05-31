@@ -1,7 +1,7 @@
 body {
     display: flex;
     margin: 0;
-    background-image: url("https://www.mogidascruzes.sp.gov.br/public/site/imagens/6/201803121349215aa6af91b5b25.jpg");
+    background-image: url("../assets/imgs/background_especialcopia.jpg");
     background-size: cover;
     justify-content: center;
     font-family: 'Urbanist', sans-serif;

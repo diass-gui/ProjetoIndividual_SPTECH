@@ -38,19 +38,20 @@ function listarRespostas(req, res) {
 
 }
 
-function enviarResposta(req, res) {
+function enviarPontuacao(req, res) {
 
-    const idQuiz = parseInt(req.params.id);
-    const idUsuario = sessionStorage.ID_USUARIO;
-    var qtdAcertos = req.params.pontuacao;
+    const idQuiz = parseInt(req.body.idQuizServer);
+    const idUsuario = req.body.idUsuarioServer;
+    var qtdAcertos = req.body.pontuacaoServer;
+    console.log(req.body);
 
     if (isNaN(idQuiz)) {
         return res.status(400).send("ID do quiz inválido.");
     }
 
-    quizModel.enviarRespostas(idQuiz, idUsuario, qtdAcertos)
+    quizModel.enviarTentativa(idQuiz, idUsuario, qtdAcertos)
         .then(resultado => {
-            res.json(resultado); // envia os dados como JSON
+            res.json(resultado); 
         })
         .catch(erro => {
             console.error("Erro ao buscar perguntas e respostas: ", erro.sqlMessage);
@@ -62,5 +63,5 @@ function enviarResposta(req, res) {
 module.exports = {
     listarPerguntas, 
     listarRespostas, 
-    enviarResposta
+    enviarPontuacao
 };

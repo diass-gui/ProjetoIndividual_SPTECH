@@ -28,10 +28,10 @@ function buscarRespostas(idQuiz) {
     return database.executar(instrucao);
 }
 
-function enviarRespostas(idQuiz, idUsuario, qtdAcertos) {
+function enviarTentativa(idQuiz, idUsuario, pontuacao) {
     var instrucao = `
     INSERT INTO Dashboard(fkUsuario, fkQuiz, pontuacao) VALUES 
-    ('${idUsuario}', '${idQuiz}', '${qtdAcertos}');
+    ('${idUsuario}', '${idQuiz}', '${pontuacao}');
     `;
 
     return database.executar(instrucao);
@@ -40,5 +40,5 @@ function enviarRespostas(idQuiz, idUsuario, qtdAcertos) {
 module.exports = {
     buscarPerguntas, 
     buscarRespostas, 
-    enviarRespostas
+    enviarTentativa
 };

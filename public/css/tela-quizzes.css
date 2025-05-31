@@ -33,9 +33,26 @@ body {
     text-decoration: underline;
     transition: 310ms;
 }
-.navbar-lateral .btn-logout { /* botão de logout */
+.navbar-lateral .campo_navbar .menu_lista {
+    display: none;
+    flex-direction: column;
+    margin-top: 5px;
+    padding-left: 10px;
+}
+
+.navbar-lateral .campo_navbar .menu_lista a {
+    text-decoration: none;
+    color: white;
+    margin: 3px 0;
+    transition: color 0.2s;
+}
+
+.navbar-lateral .campo_navbar .menu_lista a:hover {
+    color: #f0c000;
+}
+.navbar-lateral .btn-logout { 
     display: flex;
-    margin-top: 180px;
+    margin-top: 50px;
 }
 .quizzes {
     display: flex;

@@ -13,6 +13,7 @@
 </head>
 <body onload="validarSessao()">
     
+  <div class="container">
    <div class="navbar-lateral">
         <img src="../assets/imgs/logo_punho_removebg.png" alt="logo_VozQuebrada">
         <div class="msg_user">
@@ -22,8 +23,18 @@
             <div class="campo_navbar">
                 <h4><a href="../dashboard/visaogeral.html">Visão Geral</a></h4>
             </div>
+            <div class="campo_navbar" id="div_lista_dashboards">
+                <h4><a href="#" onclick="listarDashs(event)">Dashboards</a></h4>
+                    <div class="menu_lista" id="lista_dashboards">
+                        <a href="../dashboard/dashboard.html?id=1">Quiz - Rap/MC</a>
+                        <a href="../dashboard/dashboard.html?id=2">Quiz - DJ</a>
+                        <a href="../dashboard/dashboard.html?id=3">Quiz - Breakdance</a>
+                        <a href="../dashboard/dashboard.html?id=4">Quiz - Graffiti</a>
+                        <a href="../dashboard/dashboard.html?id=5">Quiz - Especial</a>
+                    </div>
+            </div>
             <div class="campo_navbar">
-                <h4><a href="../dashboard/visaogeral.html">Dashboards</a></h4>
+                <h4><a href="../quiz/tela-quizzes.html">Quizzes</a></h4>
             </div>
         </div>
         <div class="btn-logout">
@@ -31,32 +42,102 @@
         </div>
     </div>
 
-    <div>
-        <canvas id="myChart"></canvas>
+    <div class="tela_dashboard">
+      <div class="titulo_dashboard">
+        <h2>Dashboard - Quiz sobre Rap/MC</h2>
+      </div>
+      <div class="grafico">
+        <canvas id="grafico_tentativas"></canvas>
+        <div class="indicadores">
+        <div class="indicador">
+          <h3>Média de pontos: <b id="b_media">0</b></h3>
+        </div>
+        <div class="indicador">
+          <h3>Quantidade de tentativas: <strong id="b_qtdTentativa">0</strong></h3>
+        </div>
+        <div class="indicador">
+          <h3>Maior pontuação: <strong id="b_maxPontuacao">0</strong></h3>
+        </div>
+      </div>
+      </div>
+      
     </div>
+    
+    <script>
+
+      const ctx = document.getElementById('grafico_tentativas');
+
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Tentativa 1', 'Tentativa 2', 'Tentativa 3', 'Tentativa 4', 'Tentativa 5', 'Tentativa 6'],
+          datasets: [{
+            label: 'Pontuação',
+            data: [2, 7, 5, 1, 6, 8],
+            borderWidth: 1,
+            backgroundColor: "orange"
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    </script>
+  </div>
 
 </body>
 </html>
 
 <script>
-  const ctx = document.getElementById('myChart');
 
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-      datasets: [{
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  });
+  const urlParams = new URLSearchParams(window.location.search);
+  const idQuiz = parseInt(urlParams.get("id"));
+  const idUsuario = sessionStorage.ID_USUARIO;
+
+  function listarDashs(event) {
+
+        event.preventDefault(); 
+        const menu = document.getElementById('lista_dashboards');
+        menu.style.display = (menu.style.display === 'flex') ? 'none' : 'flex';
+    
+  }
+
+  async function exibirMedia() {
+
+    var fetch_media = await fetch(`/dashboard/dashboard/${idQuiz}/${idUsuario}`);
+    var dados_media = await fetch_media.json();
+    console.log(dados_media[0].media_pontuacao);
+
+    b_media.innerHTML=`${parseInt(dados_media[0].media_pontuacao)}`;
+    
+  }
+
+  async function exibirPontuacaoMaxima() {
+    
+    var fetch_pontuacao = await fetch(`/dashboard/pontuacao/${idQuiz}/${idUsuario}`);
+    var dados_pontuacao = await fetch_pontuacao.json();
+    console.log(dados_pontuacao[0].max_pontuacao);
+
+    b_maxPontuacao.innerHTML=`${parseInt(dados_pontuacao[0].max_pontuacao)}`;
+  }
+
+  async function exibirQtdTentativas() {
+
+    var fetch_qtdTentativa = await fetch(`/dashboard/tentativas/${idQuiz}/${idUsuario}`);
+    var dados_tentativas = await fetch_qtdTentativa.json();
+    // console.log(dados_tentativas);
+    console.log(dados_tentativas[0].qtd_tentativas);
+
+    b_qtdTentativa.innerHTML=`${dados_tentativas[0].qtd_tentativas}`;
+
+  }
+
+  exibirMedia();
+  exibirPontuacaoMaxima();
+  exibirQtdTentativas();
+
 </script>

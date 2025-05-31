@@ -142,11 +142,12 @@
 
         contador++;
         
-        if(contador > alternativas.length) {
+        if(contador > 10) {
             html = `<div class='quizEspecial'>
             <h2>Você terminou o quiz!</h2>
             </div>`;
             div_quizEspecial.innerHTML=html;
+            enviarPontuacao(contadorAcerto);
             setTimeout(DirecionarParaDash, 3000);
         };
 
@@ -188,7 +189,7 @@
 
     // Direcionar para a Dash
     function DirecionarParaDash() {
-        window.location="../dashboard/dashboard.html";
+        window.location="../dashboard/dashboard.html?id=5";
     }
 
     // Voltar para tela anterior
@@ -210,6 +211,40 @@
             contadorErro++;
             console.log(`Erros: ${contadorErro}`);
         }
+    }
+
+    function enviarPontuacao(pontuacao) {
+
+        console.log(contador);
+        console.log(contadorAcerto + contadorErro);
+
+        fetch(`/quiz/dashboard/`, {
+            method: "POST", 
+            headers: {
+                "Content-Type" : "application/json",
+            }, 
+        body: JSON.stringify({
+
+        idUsuarioServer: idUsuario, 
+        idQuizServer: idQuiz, 
+        pontuacaoServer: contadorAcerto
+        
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+
+          alert("Pontuação enviada!")
+        } else {
+          throw "Houve um erro ao tentar enviar a pontuação!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
     }
 
 </script>

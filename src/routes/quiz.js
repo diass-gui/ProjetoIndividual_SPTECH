@@ -10,8 +10,8 @@ router.get("/respostas/:id", function (req, res) {
     quizController.listarRespostas(req, res);
 });
 
-router.post("/dashboard/:id/:acertos/:usuarios", function(req, res) {
-    quizController.enviarResposta(req, res);
+router.post("/dashboard/", function(req, res) {
+    quizController.enviarPontuacao(req, res);
 });
 
 module.exports = router;

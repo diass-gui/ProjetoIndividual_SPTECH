@@ -142,12 +142,13 @@
 
         contador++;
         
-        if(contador > alternativas.length) {
+        if(contador > 10) {
             html = `<div class='quizGraffiti'>
             <h2>Você terminou o quiz!</h2>
             </div>`;
             div_quizGraffiti.innerHTML=html;
-            setTimeout(DirecionarParaDash, 3000);
+            enviarPontuacao(contadorAcerto);
+            setTimeout(DirecionarParaDash, 2000);
         };
 
     let indiceAlt = alternativas[indice];
@@ -188,7 +189,7 @@
 
     // Direcionar para a Dash
     function DirecionarParaDash() {
-        window.location="../dashboard/dashboard.html";
+        window.location="../dashboard/dashboard.html?id=4";
     }
 
     // Voltar para tela anterior
@@ -211,5 +212,7 @@
             console.log(`Erros: ${contadorErro}`);
         }
     }
+
+    
 
 </script>

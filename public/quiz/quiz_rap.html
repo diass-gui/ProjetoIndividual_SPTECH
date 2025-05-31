@@ -140,16 +140,19 @@
         var html = ``;
 
         contador++;
-        
-        if(contador > alternativas.length) {
-            html = `<div class='quizRap'>
-            <h2>Você terminou o quiz!</h2>
-            </div>`;
-            div_quizRap.innerHTML=html;
-            setTimeout(DirecionarParaDash, 3000);
-        };
 
     let indiceAlt = alternativas[indice];
+
+    console.log(indiceAlt);
+    
+    if(contador > 10) {
+        html = `<div class='quizRap'>
+        <h2>Você terminou o quiz!</h2>
+        </div>`;
+        div_quizRap.innerHTML=html;
+        enviarPontuacao(contadorAcerto);
+        setTimeout(DirecionarParaDash, 2000);
+    };
 
     let altA = indiceAlt.alternativaA.replace(/'/g, "\\'");
     let altB = indiceAlt.alternativaB.replace(/'/g, "\\'");
@@ -175,7 +178,7 @@
                 <button onclick="ProximaPergunta(${contador})">Prosseguir</button>
             </div>
            `;
-           
+
         div_quizRap.innerHTML=html;
 
     }
@@ -187,7 +190,7 @@
 
     // Direcionar para a Dash
     function DirecionarParaDash() {
-        window.location="../dashboard/dashboard.html";
+        window.location="../dashboard/dashboard.html?id=1";
     }
 
     // Voltar para tela anterior
@@ -209,14 +212,15 @@
             contadorErro++
             console.log(`Erros: ${contadorErro}`);
         }
-        
-        enviarPontuacao(contadorAcerto);
 
     }
 
-    function enviarPontuacao(Pontuacao) {
+    function enviarPontuacao(pontuacao) {
 
-        fetch(`/dashboard/${idUsuario}/${idQuiz}/${pontuacao}`, {
+        console.log(contador);
+        console.log(contadorAcerto + contadorErro);
+
+        fetch(`/quiz/dashboard/`, {
             method: "POST", 
             headers: {
                 "Content-Type" : "application/json",
@@ -234,12 +238,9 @@
 
         if (resposta.ok) {
 
-          setTimeout(() => {
-            window.location = "login.html";
-          }, "1400");
-
+          alert("Pontuação enviada!")
         } else {
-          throw "Houve um erro ao tentar realizar o cadastro!";
+          throw "Houve um erro ao tentar enviar a pontuação!";
         }
       })
       .catch(function (resposta) {
@@ -247,4 +248,5 @@
       });
 
     }
+    
 </script>
