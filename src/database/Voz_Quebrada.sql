@@ -179,4 +179,32 @@ INSERT INTO Resposta(resposta, fkPergunta) VALUES
 ("Cypher(roda de dança)", 28), 
 ("Break-Boy", 29), 
 ("Breakbeat e Funk americano dos anos 70/80", 30);
- 
+
+
+INSERT INTO Perguntas(pergunta, fkQuiz) VALUES
+("O que é o Scratch?", 2), 
+("Como era as unidades de mídia, que continham as músicas, que os DJs utilizavam no ínicio?", 2), 
+("Considerado um pioneiro entre os DJs do Brasil, tendo iniciado sua carreira desde a década de 80. Qual o seu nome?", 2), 
+("Qual equipamento é fundamental para a técnica de 'Scratching'?", 2), 
+("O termo 'discotecagem' se refere a: ", 2), 
+("Qual o famoso DJ, que compõe o grupo de rap Racionais MC'S?", 2), 
+("Qual o papel tradicional do DJ?", 2), 
+("O DJ é considerado qual dos quatro elementos do Hip Hop?", 2), 
+("Qual gênero de música foi mais sampleada pelos DJs de Hip Hop no Brasil nas décadas de 80 e 90?", 2), 
+("Na década de 1990, qual meio de comunicação foi essencial para a difusão da cultura DJ e do rap nacional?", 2);
+
+SELECT * FROM Perguntas WHERE fkQuiz = 2;
+
+INSERT INTO Resposta(resposta, fkPergunta) VALUES
+("Movimento de mexer no disco/vinil durante a reprodução da música, gerando um novo som", 31), 
+("Disco/Vinil", 32), 
+("DJ Hum", 33), 
+("Toca-discos", 34), 
+("Mixar músicas ao vivo com vinis ou digitais", 35),
+("DJ KL Jay", 36), 
+("Criar batidas, mixar músicas e animar festas", 37), 
+("O primeiro elemento", 38), 
+("Funk e Soul", 39), 
+("Rádios comunitárias", 40);
+
+SELECT * FROM Resposta;
