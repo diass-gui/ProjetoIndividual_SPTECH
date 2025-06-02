@@ -44,59 +44,38 @@
 
     <div class="tela_dashboard">
       <div class="titulo_dashboard">
-        <h2>Dashboard - Quiz sobre Rap/MC</h2>
+        <h2>Dashboard - Quiz: <strong id="elemento_quiz">a</strong></h2>
       </div>
       <div class="grafico">
         <canvas id="grafico_tentativas"></canvas>
         <div class="indicadores">
         <div class="indicador">
-          <h3>Média de pontos: <b id="b_media">0</b></h3>
+          <h3>Média de pontos: <b id="b_media">0</b>/10</h3>
         </div>
         <div class="indicador">
           <h3>Quantidade de tentativas: <strong id="b_qtdTentativa">0</strong></h3>
         </div>
         <div class="indicador">
-          <h3>Maior pontuação: <strong id="b_maxPontuacao">0</strong></h3>
+          <h3>Maior pontuação: <strong id="b_maxPontuacao">0</strong>/10</h3>
         </div>
       </div>
       </div>
       
     </div>
-    
-    <script>
-
-      const ctx = document.getElementById('grafico_tentativas');
-
-      new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: ['Tentativa 1', 'Tentativa 2', 'Tentativa 3', 'Tentativa 4', 'Tentativa 5', 'Tentativa 6'],
-          datasets: [{
-            label: 'Pontuação',
-            data: [2, 7, 5, 1, 6, 8],
-            borderWidth: 1,
-            backgroundColor: "orange"
-          }]
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true
-            }
-          }
-        }
-      });
-    </script>
   </div>
 
 </body>
 </html>
 
 <script>
-
+  
   const urlParams = new URLSearchParams(window.location.search);
   const idQuiz = parseInt(urlParams.get("id"));
   const idUsuario = sessionStorage.ID_USUARIO;
+  var tentativasGrafico = [];
+  var pontuacaoTentativas = [];
+  
+  const graficoTentativas = document.getElementById('grafico_tentativas');
 
   function listarDashs(event) {
 
@@ -104,6 +83,16 @@
         const menu = document.getElementById('lista_dashboards');
         menu.style.display = (menu.style.display === 'flex') ? 'none' : 'flex';
     
+  }
+
+  async function exibirElemento() {
+
+    var fetch_elemento = await fetch(`/dashboard/elemento/${idQuiz}`);
+    var dados_elemento = await fetch_elemento.json();
+    // console.log(dados_elemento);
+
+    elemento_quiz.innerHTML=`${dados_elemento[0].elementoQuiz}`;
+
   }
 
   async function exibirMedia() {
@@ -120,7 +109,7 @@
     
     var fetch_pontuacao = await fetch(`/dashboard/pontuacao/${idQuiz}/${idUsuario}`);
     var dados_pontuacao = await fetch_pontuacao.json();
-    console.log(dados_pontuacao[0].max_pontuacao);
+    console.log(`Pontuação máxima: ${dados_pontuacao[0].max_pontuacao}`);
 
     b_maxPontuacao.innerHTML=`${parseInt(dados_pontuacao[0].max_pontuacao)}`;
   }
@@ -129,15 +118,88 @@
 
     var fetch_qtdTentativa = await fetch(`/dashboard/tentativas/${idQuiz}/${idUsuario}`);
     var dados_tentativas = await fetch_qtdTentativa.json();
-    // console.log(dados_tentativas);
-    console.log(dados_tentativas[0].qtd_tentativas);
+    console.log(`quantidade de tentativas: ${dados_tentativas[0].qtd_tentativas}`);
 
     b_qtdTentativa.innerHTML=`${dados_tentativas[0].qtd_tentativas}`;
+
+  }
+
+  async function exibirDadosGrafico() {
+
+    var fetch_dadosGrafico = await fetch(`/dashboard/grafico/${idQuiz}/${idUsuario}`);
+    var dados_grafico = await fetch_dadosGrafico.json();
+    console.log(dados_grafico);
+
+    // laço de repetição para enviar os dados de tentativas para um vetor/array
+    dados_grafico.forEach(tentativa => {
+      tentativasGrafico.push(tentativa.tentativa);
+      console.log(tentativa.tentativa);
+    });
+
+    // laço de repetição para enviar os dados de pontuação para um vetor/array
+    dados_grafico.forEach(pontuacao => {
+      pontuacaoTentativas.push(pontuacao.pontuacao);
+      console.log(pontuacao.pontuacao);
+    });
+    
+    exibirGrafico();
+
+  }
+
+  function exibirGrafico() {
+
+    console.log(pontuacaoTentativas);
+    console.log(tentativasGrafico);
+
+    var tentativas = [];
+    var tentativas_posicao = [];
+
+    for(var indice = 0; indice < tentativasGrafico.length; indice++) {
+
+      tentativas.push(`Tentativa: ${indice+1}`);
+
+    }
+
+    for(var posicao = 0; posicao < tentativasGrafico.length; posicao++) {
+
+      tentativas_posicao.push(posicao+1);
+
+    }
+
+    if(tentativas.length > 6) {
+      tentativas = tentativas.slice(tentativas.length-6, tentativas.length);
+      pontuacaoTentativas = pontuacaoTentativas.slice(pontuacaoTentativas.length-6, pontuacaoTentativas.length);
+    }
+    
+    console.log(tentativas);
+    console.log(pontuacaoTentativas);
+
+    new Chart(graficoTentativas, {
+        type: 'bar',
+        data: {
+          labels: tentativas,
+          datasets: [{
+            label: 'Pontuação',
+            data: pontuacaoTentativas,
+            borderWidth: 1,
+            backgroundColor: "orange"
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
 
   }
 
   exibirMedia();
   exibirPontuacaoMaxima();
   exibirQtdTentativas();
+  exibirDadosGrafico();
+  exibirElemento();
 
 </script>

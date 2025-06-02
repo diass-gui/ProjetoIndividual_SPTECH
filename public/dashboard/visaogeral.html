@@ -5,29 +5,200 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../js/sessao.js"></script>
-    <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/visaogeral.css">
+    <link rel="stylesheet" href="../css/tela-quizzes.css">
     <title>Visão Geral | Voz da Quebrada</title>
 </head>
-<body>
+<body onload="validarSessao()">
     
-    <div class="barra_lateral">
-        <!-- <div class="card_msgUsuario">
-            <div class="icon_usuario">
-                <img src="https://www.flaticon.com/free-icons/user">
-            </div> -->
-            <h3>Olá,<span id="b_usuario"> usuário</span>!</h3>
-        <!-- </div> -->
-    </div>
+    <div class="container">
+    <div class="navbar-lateral">
+        <img src="../assets/imgs/logo_punho_removebg.png" alt="logo_VozQuebrada">
+        <div class="msg_user">
+            <h3>Olá, <span id="b_usuario"> usuário</span>!</h3>
+        </div>
+        <div class="paginas_navbar">
+            <div class="campo_navbar" id="div_lista_dashboards">
+                <h4><a href="#" onclick="listarDashs(event)">Dashboards</a></h4>
+                    <div class="menu_lista" id="lista_dashboards">
+                        <a href="../dashboard/dashboard.html?id=1">Quiz - Rap/MC</a>
+                        <a href="../dashboard/dashboard.html?id=2">Quiz - DJ</a>
+                        <a href="../dashboard/dashboard.html?id=3">Quiz - Breakdance</a>
+                        <a href="../dashboard/dashboard.html?id=4">Quiz - Graffiti</a>
+                        <a href="../dashboard/dashboard.html?id=5">Quiz - Especial</a>
+                    </div>
+            </div>
+            <div class="campo_navbar">
+                <h4><a href="../quiz/tela-quizzes.html">Quizzes</a></h4>
+            </div>
+        </div>
+        <div class="btn-logout">
+            <button onclick="limparSessao()">Sair</button>
+        </div>
+        </div>
 
-    <div class="dash_visaogeral">
-        
-    </div>
+    <div class="conteudo-principal">
+        <div class="titulo_dashboard">
+            <h2>Dashboard - Visão Geral</h2>
+        </div>
 
-    <div class="btn-logout">
-        <button onclick="limparSessao()">Sair</button>
-    </div> 
+        <div class="tela_dashboard">
+            <div class="indicadores-box">
+                <div class="indicador">
+                    <h3>Média geral de pontos: <b id="b_mediageral">0</b>/10</h3>
+                </div>
+                <div class="indicador">
+                    <h3>Quiz com mais tentativas: <strong id="b_quizmaisacessado">a</strong></h3>
+                </div>
+                <div class="indicador">
+                    <h3>Total de Tentativas(Quizzes): <strong id="b_totalTentativas">0</strong></h3>
+                </div>
+            </div>
+
+            <div class="grafico">
+                <canvas id="grafico_mediaquizzes"></canvas>
+                <canvas id="grafico_tentativasquizzes"><h4>Tentativas por quiz:</h4></canvas>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
+
+<script> 
+
+    const idUsuario = sessionStorage.ID_USUARIO;
+    const graficoMediasQuizzes = document.getElementById('grafico_mediaquizzes'); // grafico de pontuação média
+    var pontuacaoMediaQuizzes = []; // vetor que armazena as pontuações médias
+    var quizzes = []; // vetor que armazena o nome dos quizzes
+    var tentativasPorQuiz = []; // vetor que armazena a quantidade de tentativas por quiz
+    const graficoTentativasQuizzes = document.getElementById('grafico_tentativasquizzes');
+
+    function listarDashs(event) {
+
+        event.preventDefault(); 
+        const menu = document.getElementById('lista_dashboards');
+        menu.style.display = (menu.style.display === 'flex') ? 'none' : 'flex';
+    
+  }
+
+  async function exibirMediaGeral() {
+
+    var fetch_mediaGeral = await fetch(`/visaoGeral/mediaGeral/${idUsuario}`);
+    var dados_mediaGeral = await fetch_mediaGeral.json();
+
+    b_mediageral.innerHTML=`${dados_mediaGeral[0].media_geral}`;
+
+  }
+
+  async function exibirQuizComMaisAcesso() {
+
+    var fetch_quizMaisAcessado = await fetch(`/visaoGeral/quizMaisAcesso/${idUsuario}`);
+    var dados_quizMaisAcessado = await fetch_quizMaisAcessado.json();
+    // console.log(dados_quizMaisAcessado);
+
+    b_quizmaisacessado.innerHTML=`${dados_quizMaisAcessado[0].quiz}`;
+
+  }
+
+  async function exibirTotalTentativasQuizzes() {
+
+    var fetch_totalTentativas = await fetch(`/visaoGeral/totalTentativa/${idUsuario}`);
+    var dados_totalTentativas = await fetch_totalTentativas.json();
+
+    b_totalTentativas.innerHTML=`${dados_totalTentativas[0].qtdTentativa}`;
+
+  }
+
+  async function adquirirDadosGeral() {
+
+    var fetch_quizzes = await fetch(`/visaoGeral/Quizzes/${idUsuario}`);
+    var dados_quizzes = await fetch_quizzes.json();
+    console.log(dados_quizzes);
+
+    dados_quizzes.forEach(nome_quizzes => {
+        quizzes.push(nome_quizzes.quiz);
+        console.log(nome_quizzes.quiz);
+    });
+
+    dados_quizzes.forEach(media_quizzes => {
+        pontuacaoMediaQuizzes.push(media_quizzes.pontuacao_media);
+        console.log(media_quizzes.pontuacao_media);
+    });
+
+    exibirGraficoMedias();
+
+  }
+
+  async function exibirTentativasPQuiz() {
+
+    var fetch_tentativasporquiz = await fetch(`/visaoGeral/tentativasQuizzes/${idUsuario}`);
+    var dados_tentativasporquiz = await fetch_tentativasporquiz.json();
+
+    dados_tentativasporquiz.forEach(tentativasquiz => {
+        tentativasPorQuiz.push(tentativasquiz.qtdTentativa);
+        console.log(tentativasquiz.qtdTentativa);
+    });
+
+    exibirGraficoTentativasPQuiz();
+
+  }
+
+  function exibirGraficoMedias() {
+
+    console.log(quizzes);
+    console.log(pontuacaoMediaQuizzes);
+
+    new Chart(graficoMediasQuizzes, {
+        type: 'bar',
+        data: {
+          labels: quizzes,
+          datasets: [{
+            label: 'Pontuação Média',
+            data: pontuacaoMediaQuizzes,
+            borderWidth: 1,
+            backgroundColor: "orange"
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+
+  }
+
+  function exibirGraficoTentativasPQuiz() {
+
+    new Chart(graficoTentativasQuizzes, {
+        type: 'pie',
+        data: {
+          labels: quizzes,
+          datasets: [{
+            label: 'Tentativas',
+            data: tentativasPorQuiz,
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+          }
+        }
+      });
+
+
+  }
+
+  exibirMediaGeral();
+  exibirQuizComMaisAcesso();
+  exibirTotalTentativasQuizzes();
+  adquirirDadosGeral();
+  exibirTentativasPQuiz();
+
+</script>

@@ -34,7 +34,7 @@
     var respostasQuiz = [];
     var contador = 0;
     let contadorAcerto = 0;
-    let contadorErro = 0;
+    var Erros = [];
 
     const urlParams = new URLSearchParams(window.location.search);
     const idQuiz = parseInt(urlParams.get("id"));
@@ -202,15 +202,16 @@
     function pontuarPergunta(texto) {
 
         console.log(texto);
+        console.log(respostasQuiz.indexOf(texto));
 
         if(respostasQuiz.includes(texto)) {
             console.log("Certo");
-            contadorAcerto++
+            contadorAcerto++;
             console.log(`Acertos: ${contadorAcerto}`);
         } else {
             console.log("Errado");
-            contadorErro++
-            console.log(`Erros: ${contadorErro}`);
+            Erros.push(contador);
+            console.log(Erros);
         }
 
     }
@@ -218,7 +219,7 @@
     function enviarPontuacao(pontuacao) {
 
         console.log(contador);
-        console.log(contadorAcerto + contadorErro);
+        console.log(contadorAcerto);
 
         fetch(`/quiz/dashboard/`, {
             method: "POST", 

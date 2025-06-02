@@ -1,17 +1,18 @@
 var dashModel = require("../models/dashModel");
 
 function exibirDados(req, res) {
-    
-    const idQuiz = parseInt(req.params.id);
-    const idUsuario = sessionStorage.ID_USUARIO;
 
-    dashModel.exibirTentativa(idUsuario, idQuiz)
+    console.log(req.params);
+    const idQuiz = parseInt(req.params.idquiz);
+    const idUsuario = parseInt(req.params.idusuario);
+
+    dashModel.exibirTentativas(idUsuario, idQuiz)
             .then(resultado => {
                 res.json(resultado); // envia os dados como JSON
             })
             .catch(erro => {
-                console.error("Erro ao buscar perguntas e respostas: ", erro.sqlMessage);
-                res.status(500).send("Erro ao buscar perguntas e respostas.");
+                console.error("Erro ao buscar os dados das tentativas: ", erro.sqlMessage);
+                res.status(500).send("Erro ao buscar os dados das tentativas.");
             });
 }
 
@@ -65,9 +66,26 @@ function exibirQtdTentativa(req, res) {
 
 }
 
+function exibirElementoQuiz(req, res) {
+    
+    console.log(req.params);
+    const idQuiz = parseInt(req.params.idquiz);
+
+    dashModel.elementoQuiz(idQuiz)
+    .then(resultado => {
+        res.json(resultado);
+    })
+    .catch(erro => {
+        console.error("Erro ao buscar elemento do quiz: ", erro.sqlMessage);
+        res.status(500).send("Erro ao buscar o elemento do quiz.");
+    });
+
+}
+
 module.exports = {
     exibirDados, 
     exibirMedia,
     exibirMaxPontuacao,
-    exibirQtdTentativa
+    exibirQtdTentativa, 
+    exibirElementoQuiz
 }

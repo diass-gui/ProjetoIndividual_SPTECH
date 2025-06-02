@@ -241,3 +241,60 @@ SELECT p.pergunta,
         ON p.idPergunta = r.fkPergunta
         WHERE p.fkQuiz = 5;
         
+SELECT * FROM Dashboard;
+
+SELECT idTentativa AS tentativa,
+        fkUsuario as id_usuario, 
+        fkQuiz as id_quiz,
+        pontuacao as pontuacao
+    FROM Dashboard 
+    WHERE fkUsuario = 1 AND 
+    fkQuiz = 1
+    ORDER BY idTentativa;
+
+SELECT COUNT(idTentativa), elementoQuiz FROM Dashboard -- TENTATIVAS POR ELEMENTO
+	JOIN Quiz
+    ON fkQuiz = idQuiz
+    WHERE fkUsuario = 1
+    GROUP BY idQuiz;
+    
+SELECT ROUND(AVG(pontuacao),1) FROM Dashboard
+	WHERE fkUsuario = 1; -- PONTUAÇÃO MÉDIA GERAL
+
+SELECT COUNT(idTentativa) FROM Dashboard
+	WHERE fkUsuario = 1; -- total de tentativas (todos os quizzes)
+
+SELECT COUNT(MAX(idTentativa)) AS qtdTentativa, 
+    elementoQuiz AS quiz
+    FROM Dashboard
+    JOIN Quiz
+    ON fkQuiz = idQuiz
+    WHERE fkUsuario = 2
+    GROUP BY idQuiz;
+
+SELECT elementoQuiz AS Quiz FROM Quiz
+	ORDER BY idQuiz;
+    
+SELECT ROUND(AVG(pontuacao),1) AS pontuacao_media, 
+		elementoQuiz AS quiz 
+        FROM Dashboard
+        JOIN Quiz 
+        ON fkQuiz = idQuiz
+        WHERE fkUsuario = 1
+		GROUP BY fkQuiz;
+        
+SELECT * FROM Dashboard 
+	WHERE fkUsuario = 4;
+    
+SELECT elementoQuiz AS quiz,
+	COUNT(idTentativa) AS qtdTentativa
+    FROM Dashboard
+    JOIN Quiz
+    ON fkQuiz = idQuiz
+    WHERE fkUsuario = 4
+    GROUP BY idQuiz;
+    HAVING COUNT(idTentativa) > (SELECT COUNT(idTentativa), elementoQuiz
+									FROM Dashboard
+                                    JOIN Quiz
+                                    ON fkQuiz = idQuiz
+									WHERE fkUsuario = 4);

@@ -213,6 +213,38 @@
         }
     }
 
-    
+    function enviarPontuacao(pontuacao) {
+
+        console.log(contador);
+        console.log(contadorAcerto + contadorErro);
+
+        fetch(`/quiz/dashboard/`, {
+            method: "POST", 
+            headers: {
+                "Content-Type" : "application/json",
+            }, 
+        body: JSON.stringify({
+
+        idUsuarioServer: idUsuario, 
+        idQuizServer: idQuiz, 
+        pontuacaoServer: contadorAcerto
+        
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+
+          alert("Pontuação enviada!")
+        } else {
+          throw "Houve um erro ao tentar enviar a pontuação!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+    }
 
 </script>

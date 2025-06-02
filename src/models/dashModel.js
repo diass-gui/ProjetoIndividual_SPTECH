@@ -1,16 +1,19 @@
 var database = require("../database/config");
 
-// function exibirTentativa(idUsuario, idQuiz) {
-//     var instrucao = `
-//     SELECT idTentativa, ${idUsuario}, ${idQuiz}, pontuacao FROM Dashboard AS d
-//     JOIN Usuario AS u
-//     ON u.idUsuario = d.${idUsuario}
-//     JOIN Quiz AS q
-//     ON q.idQuiz = d.${idQuiz};
-//     `;
+function exibirTentativas(idUsuario, idQuiz) {
+    var instrucao = `
+    SELECT idTentativa AS tentativa,
+        fkUsuario as id_usuario, 
+        fkQuiz as id_quiz,
+        pontuacao as pontuacao
+    FROM Dashboard 
+    WHERE fkUsuario = ${idUsuario} AND 
+    fkQuiz = ${idQuiz}
+    ORDER BY idTentativa;
+    `;
 
-//     return database.executar(instrucao);
-// }
+    return database.executar(instrucao);
+}
 
 function mediaPontuacao(idQuiz, idUsuario) {
     var instrucao = `
@@ -39,9 +42,19 @@ function qtdTentativa(idQuiz, idUsuario) {
     return database.executar(instrucao);
 }
 
+function elementoQuiz(idQuiz) {
+    var instrucao = `
+    SELECT elementoQuiz FROM Quiz
+    WHERE idQuiz = ${idQuiz};
+    ;`
+
+    return database.executar(instrucao);
+}
+
 module.exports = {
-    // exibirTentativa, 
+    exibirTentativas, 
     mediaPontuacao,
     maxPontuacao,
-    qtdTentativa
+    qtdTentativa, 
+    elementoQuiz
 }
