@@ -1,0 +1,67 @@
+body {
+  background-color: black;
+  color: white;
+  font-family: 'Urbanist', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.titulo_pagina {
+  background-color: orange;
+  text-align: center;
+  padding: 20px;
+  font-family: 'Bangers', cursive;
+}
+
+.linha_tempo {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 40px;
+}
+
+.evento {
+  display: flex;
+  gap: 20px;
+}
+
+.ano {
+  font-size: 36px;
+  font-weight: bold;
+  color: orange;
+  min-width: 100px;
+}
+
+.descricao-com-imagem {
+  display: flex;
+  gap: 20px;
+  flex: 1;
+}
+
+.descricao {
+  flex: 1;
+}
+
+.descricao h2 {
+  font-family: 'Bangers', cursive;
+  font-size: 26px;
+  margin-bottom: 10px;
+  color: orange;
+}
+
+.descricao p {
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.imagem-evento {
+  max-width: 280px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.imagem-evento img {
+  width: 100%;
+  border-radius: 10px;
+}
