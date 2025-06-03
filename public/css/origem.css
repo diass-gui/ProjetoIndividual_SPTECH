@@ -1,0 +1,155 @@
+body {
+  background-color: black;
+  color: white;
+  font-family: 'Urbanist', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+.titulo_pagina {
+  background-color: orange;
+  text-align: center;
+  padding: 20px;
+  font-family: 'Bangers', cursive;
+  font-size: 2rem;
+  margin-bottom: 40px;
+}
+
+.linha_tempo {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  padding: 0 40px 40px 40px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.evento {
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+}
+
+.evento .ano {
+  font-size: 40px;
+  font-weight: bold;
+  color: orange;
+  min-width: 100px;
+  user-select: none;
+}
+
+.descricao-com-imagem {
+  flex: 1;
+  display: flex;
+  gap: 20px;
+  justify-content: flex-start;
+}
+
+.descricao {
+  flex: 1;
+}
+
+.descricao h2 {
+  font-family: 'Bangers', cursive;
+  font-size: 28px;
+  margin-bottom: 12px;
+  color: orange;
+}
+
+.descricao p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.imagem-evento {
+  max-width: 300px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.imagem-evento img {
+  border-radius: 10px;
+  max-width: 100%;
+  height: auto;
+}
+
+.curiosidades {
+  background-color: rgb(61, 60, 60);
+  border-radius: 10px;
+  padding: 20px 30px;
+  max-width: 900px;
+  margin: 40px auto;
+}
+
+.curiosidades h2 {
+  font-family: 'Bangers', cursive;
+  font-size: 28px;
+  color: orange;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.curiosidades ul {
+  list-style: disc inside;
+  font-size: 16px;
+  line-height: 1.6;
+  color: white;
+}
+
+.curiosidades li {
+  margin-bottom: 12px;
+}
+.curiosidades p {
+    font-size: 18px;
+} 
+.a-curiosidades a {
+    text-decoration: none;
+}
+
+.rodape {
+    margin: 0 auto;
+    background-color: rgb(61, 60, 60);
+    display: flex;
+    color: white;
+    justify-content: space-around;
+    height: 120px;
+}
+.rodape .imagem_projeto {
+    margin: 20px;
+}
+.rodape .imagem_projeto img {
+    height: 80px;
+    width: 100px;
+}
+.rodape .redes_autor {
+    margin: 10px;
+    margin-bottom: 30px;
+}
+.rodape .redes_autor h3 {
+    margin-left: 30px;
+}
+.rodape .redes_autor a {
+    text-decoration: none;
+    color: white;
+    padding: 4px;
+}
+.rodape .redes_autor a:hover {
+    background-color: black;
+    border-radius: 8px;
+}
+.rodape .contato {
+    margin: 10px;
+}
+.rodape .contato a {
+    color: white;
+    text-decoration: none;
+}
+.rodape .contato a:hover {
+    color: white;
+    background-color: black;
+    transition: 310ms;
+}
+.rodape .consideracao_final {
+    color: rgb(133, 129, 129);
+    margin-top: 50px;
+}

@@ -7,7 +7,6 @@ body {
     margin: 0;
     font-family: 'Urbanist', sans-serif;
 }
-/* Navbar */
 .navbar {
     background-color: rgb(61, 60, 60);
     display: flex;
