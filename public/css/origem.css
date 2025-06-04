@@ -27,6 +27,9 @@ body {
   display: flex;
   align-items: flex-start;
   gap: 30px;
+  background-color: #111;
+  border-radius: 12px;
+  border-left: 5px solid orange;
 }
 
 .evento .ano {
@@ -35,6 +38,7 @@ body {
   color: orange;
   min-width: 100px;
   user-select: none;
+  padding: 10px;
 }
 
 .descricao-com-imagem {

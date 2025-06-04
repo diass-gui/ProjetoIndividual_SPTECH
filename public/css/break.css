@@ -1,0 +1,89 @@
+main.linha_tempo {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 40px 20px;
+  background-color: black;
+  color: #000;
+}
+
+.evento {
+  display: flex;
+  flex-direction: column;
+  background-color: #111;
+  border-left: 8px solid #FFA500;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  color: #fff;
+}
+
+.evento .ano {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #FFA500;
+  margin-bottom: 10px;
+}
+
+.descricao-com-imagem {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.descricao {
+  flex: 1;
+}
+
+.descricao h2 {
+  font-size: 1.5rem;
+  color: #FFA500;
+  margin-bottom: 10px;
+}
+
+.descricao p {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.imagem-evento {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imagem-evento img {
+  max-width: 100%;
+  border-radius: 8px;
+  border: 3px solid #FFA500;
+}
+.playlist-section {
+  background-color: #000;
+  color: #fff;
+  padding: 40px 20px;
+  text-align: center;
+  border-top: 5px solid #FFA500;
+}
+.playlist-section h2 {
+  font-size: 1.8rem;
+  color: #FFA500;
+  margin-bottom: 20px;
+}
+.playlist-section p {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+.playlist-section a {
+  color: #fff;
+  background-color: #FFA500;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+.playlist-section a:hover {
+  background-color: #cc8400;
+}
