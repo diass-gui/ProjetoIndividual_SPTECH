@@ -3,7 +3,7 @@ html {
     padding: 0;
 }
 body {
-    background-color: rgb(0, 0, 0);
+    background-color: black;
     margin: 0;
     font-family: 'Urbanist', sans-serif;
 }
@@ -144,7 +144,6 @@ body {
     display: flex;
     color: white;
     justify-content: space-around;
-    /* background-color: rgb(5, 82, 197); */
     background-color: rgb(190, 104, 5);
 }
 .sobre_autor .imagem_autor {
@@ -161,7 +160,7 @@ body {
 }
 .sobre_autor .autor_texto h1 {
     padding: 10px;
-    margin-left: 200px;
+    margin-left: 300px;
     font-family: 'Bangers', cursive;
     text-decoration: underline;
 }
@@ -175,32 +174,49 @@ body {
     display: flex;
     color: white;
     justify-content: space-around;
-    height: 120px;
+    height: 25vh;
+    gap: 130px;
 }
 .rodape .imagem_projeto {
-    margin: 20px;
+    margin-top: 35px;
 }
 .rodape .imagem_projeto img {
-    height: 80px;
-    width: 100px;
+    height: 20vh;
+    width: 10vw;
+    align-self: center;
 }
 .rodape .redes_autor {
     margin: 10px;
-    margin-bottom: 30px;
+    /* margin-bottom: 15px; */
+    align-self: center;
 }
 .rodape .redes_autor h3 {
     margin-left: 30px;
 }
+.rodape .redes_autor ul {
+    gap: 18px;
+}
 .rodape .redes_autor a {
     text-decoration: none;
     color: white;
-    padding: 4px;
+    padding: 7px;
 }
 .rodape .redes_autor a:hover {
     background-color: black;
     border-radius: 8px;
 }
-.rodape .contato {
+.marca_VozQuebrada {
+    display: flex;
+    background-color: rgb(61, 60, 60);
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+}
+.marca_VozQuebrada .consideracao_final {
+    color: rgb(133, 129, 129);
+}
+
+/* .rodape .contato {
     margin: 10px;
 }
 .rodape .contato a {
@@ -211,8 +227,4 @@ body {
     color: white;
     background-color: black;
     transition: 310ms;
-}
-.rodape .consideracao_final {
-    color: rgb(133, 129, 129);
-    margin-top: 50px;
-}
+} */
