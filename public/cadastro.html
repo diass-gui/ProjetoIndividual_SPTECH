@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,7 +21,7 @@
         </div>
             <div class="dados_cadastro">
                 <div class="titulo_cadastro">
-                    <h2>Junte-se a nós, mano! Faça o seu cadastro!</h2>
+                    <h2>Junte-se a nós! Faça o seu cadastro!</h2>
                 </div>
                 <div class="campo_cadastro">
                     <b>Primeiro, digite o seu nome:</b>
@@ -52,8 +52,10 @@
                 
             </div>
     </div>
-    <div class="imagem_cadastro">
-        <img src="../assets/imgs/foto_cadastro.jpg">
+
+    <div class="mensagemErro" id="mensagemErro">
+        <h3 class="tituloMsgErro">ERRO</h3>
+        <p id="mensagem_erro">Preencha os campos corretamente.</p>
     </div>
 
 </body>
@@ -63,7 +65,7 @@
 
     function cadastrar() {
 
-    //Recupere o valor da nova input pelo nome do id
+    // Recupere o valor da nova input pelo nome do id
     // Agora vá para o método fetch logo abaixo
     var nomeVar = input_nome.value;
     var emailVar = input_email.value;
@@ -79,15 +81,20 @@
       senhaVar == "" ||
       confirmacaoSenhaVar == ""
     ) {
-      
-        return alert("Preencha todos os campos corretamente.");
-
-    } else if(emailVar.indexOf("@") == -1 || emailVar.indexOf(".com") == -1) {
-      return alert("Insira um email válido!");
-    } else if(senhaVar != confirmacaoSenhaVar) {
-      return alert("As senhas estão diferentes!");
-    } else if(senhaVar.length < 6) {
-      return alert("Insira uma senha válida!");
+      mensagemErro.style.display = "block";
+      return mensagem_erro.innerHTML="Preencha todos os campos corretamente.";
+    } 
+    else if(emailVar.indexOf("@") == -1 || emailVar.indexOf(".com") == -1) {
+      mensagemErro.style.display = "block";
+      return mensagem_erro.innerHTML="Insira um email válido!";
+    } 
+    else if(senhaVar != confirmacaoSenhaVar) {
+      mensagemErro.style.display = "block";
+      return mensagem_erro.innerHTML="As senhas estão diferentes!";
+    } 
+    else if(senhaVar.length < 6) {
+      mensagemErro.style.display = "block";
+      return mensagem_erro.innerHTML="Insira uma senha válida!";
     }
     else {
       setTimeout(5000);
@@ -128,6 +135,10 @@
       });
       
       return false;
+    }
+
+    function apagarMensagem() {
+      mensagemErro.style.display = "none";
     }
         
 </script>
